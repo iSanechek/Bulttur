@@ -2,7 +2,7 @@ package com.isanechek.storage.entity
 
 import androidx.room.Entity
 
-@Entity(tableName = "tours_info", primaryKeys = ["id"])
+@Entity(tableName = "tours_info_table", primaryKeys = ["id"])
 data class ToursInfoEntity(val id: Int,
                            val groupTitle: String,
                            val groupUrl: String,
