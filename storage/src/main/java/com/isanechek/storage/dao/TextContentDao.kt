@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Query
 import com.isanechek.storage.entity.TextContentEntity
 
+@Dao
 abstract class TextContentDao : BaseDao<TextContentEntity> {
 	
 	@Query("SELECT * FROM text_content_table")

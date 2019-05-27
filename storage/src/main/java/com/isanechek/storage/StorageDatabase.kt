@@ -7,8 +7,10 @@ import com.isanechek.storage.entity.ToursInfoEntity
 
 @Database(entities = [
 	(ToursInfoEntity::class), 
-	(TextContentEntity::class)], version = 1, exportSchema = false)
+	(TextContentEntity::class),
+	(NewsEntity::class)], version = 1, exportSchema = false)
 abstract class StorageDatabase : RoomDatabase() {
     abstract fun homeToursInfoDao(): ToursInfoDao
     abstract fun homeContentDao(): TextContentDao
+    abstract fun homeNewsDao(): NewsDao
 }

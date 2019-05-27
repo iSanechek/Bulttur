@@ -23,4 +23,8 @@ val storageModule = module {
         get<StorageDatabase>().homeContentDao()
     }
 
+    factory {
+        get<StorageDatabase>().homeNewsDao()
+    }
+
 }
