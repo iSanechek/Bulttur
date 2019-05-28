@@ -16,7 +16,7 @@ val storageModule = module {
     }
 
     factory {
-        get<StorageDatabase>().homeToursInfoDa()
+        get<StorageDatabase>().homeToursInfoDao()
     }
 
     factory {
