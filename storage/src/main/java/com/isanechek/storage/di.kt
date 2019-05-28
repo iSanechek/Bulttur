@@ -10,7 +10,8 @@ val storageModule = module {
         Room.databaseBuilder(
             androidApplication().applicationContext,
             StorageDatabase::class.java,
-            "Balttur.db")
+            "Balttur.db"
+        )
             .fallbackToDestructiveMigrationOnDowngrade()
             .build()
     }

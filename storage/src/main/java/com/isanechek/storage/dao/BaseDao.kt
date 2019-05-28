@@ -22,5 +22,5 @@ interface BaseDao<T> {
     @Delete
     @JvmSuppressWildcards
     suspend fun remove(items: Set<T>)
-    
+
 }
