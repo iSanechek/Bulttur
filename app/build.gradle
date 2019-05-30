@@ -9,6 +9,7 @@ static def getDateTime() {
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlinx-serialization'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 android {
@@ -16,7 +17,7 @@ android {
     def appId = "com.averdsoft.balttur"
     def fileNaming = "apk/Balttur"
     def versionNumber = 1
-    def versionMajor = "1"
+    def versionMajor = "0"
     def versionMinor = "0"
     def versionPatch = "1"
     def versionBuild = -1
@@ -60,6 +61,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlinVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutinesVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.11.0'
 
     implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
@@ -73,16 +75,19 @@ dependencies {
 
     implementation "androidx.work:work-runtime-ktx:$rootProject.workVersion"
 
+    implementation 'com.epam.coroutinecache:coroutinecache:0.9.1'
+
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion"
 
     implementation 'com.squareup.okhttp3:okhttp:3.14.2'
     implementation 'org.jsoup:jsoup:1.12.1'
+    implementation 'com.google.code.gson:gson:2.8.5'
 
     implementation "org.koin:koin-core:$rootProject.koinVersion"
     implementation "org.koin:koin-androidx-scope:$rootProject.koinVersion"
-   implementation "org.koin:koin-androidx-viewmodel:$rootProject.koinVersion"
+    implementation "org.koin:koin-androidx-viewmodel:$rootProject.koinVersion"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'

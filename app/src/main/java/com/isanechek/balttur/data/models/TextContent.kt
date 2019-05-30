@@ -1,6 +1,12 @@
 package com.isanechek.balttur.data.models
 
-data class TextContent(val content: String, val contents: Set<String>, val type: String) {
+import com.google.gson.annotations.SerializedName
+
+data class TextContent(
+    @SerializedName("content") val content: String = "",
+    @SerializedName("contents") val contents: TextContentChild = TextContentChild.toEmpty(),
+    @SerializedName("type") val type: String = ""
+) {
 
     companion object {
         const val LIST = "list"

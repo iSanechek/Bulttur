@@ -2,10 +2,14 @@ package com.isanechek.balttur.data.parsers
 
 import com.isanechek.balttur.data.models.*
 import com.isanechek.balttur.utils.Tracker
+import com.isanechek.balttur.utils.createJO
+import com.isanechek.balttur.utils.toJson
+import com.isanechek.balttur.utils.toPair
 import kotlinx.coroutines.suspendCancellableCoroutine
+import org.json.JSONArray
+import org.json.JSONObject
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
-import org.jsoup.parser.ParseError
 import org.jsoup.select.Elements
 import kotlin.coroutines.resume
 
@@ -15,7 +19,7 @@ interface HomePageParser {
     suspend fun parseSection(body: Element): Elements?
     suspend fun parseNewsBlock(body: Element): Set<News>
     suspend fun parseHeaderMenu(body: Element): Set<HeaderMenu>
-    suspend fun parseTextContent(body: Element): Set<TextContent>
+    suspend fun parseTextContent(body: Element): TextContentRoot
 }
 
 
@@ -30,7 +34,7 @@ class HomePageParserImpl(private val tracker: Tracker) : HomePageParser {
         }
     }
 
-    override suspend fun parseToursInfo(body: Element): Set<ToursInfo> = suspendCancellableCoroutine { c->
+    override suspend fun parseToursInfo(body: Element): Set<ToursInfo> = suspendCancellableCoroutine { c ->
         try {
             val temp = mutableSetOf<ToursInfo>()
             val content =
@@ -81,14 +85,17 @@ class HomePageParserImpl(private val tracker: Tracker) : HomePageParser {
             for (item in block.select("div.mnb_item.floatL")) {
                 val (titleUrl, title) = getUrlAndTitle(item.selectFirst("div.mnb_title").selectFirst("a"))
                 val (link, linkDescription) = getUrlAndTitle(item.selectFirst("div.mnb_link").selectFirst("a"))
-                temp.add(News(
-                    imgUrl = item.selectFirst("div.mnb_img img").attr("src"),
-                    date = item.selectFirst("div.mnb_date").text(),
-                    infoBlock = parseNewsInfoBlock(item.selectFirst("div.mnb_text")),
-                    link = link,
-                    linkDescription = linkDescription,
-                    title = title,
-                    titleUrl = titleUrl))
+                temp.add(
+                    News(
+                        imgUrl = item.selectFirst("div.mnb_img img").attr("src"),
+                        date = item.selectFirst("div.mnb_date").text(),
+                        infoBlock = parseNewsInfoBlock(item.selectFirst("div.mnb_text")),
+                        link = link,
+                        linkDescription = linkDescription,
+                        title = title,
+                        titleUrl = titleUrl
+                    )
+                )
             }
             c.resume(temp.toSet())
         } catch (ex: Exception) {
@@ -156,33 +163,46 @@ class HomePageParserImpl(private val tracker: Tracker) : HomePageParser {
         }
     }
 
-    override suspend fun parseTextContent(body: Element): Set<TextContent> = suspendCancellableCoroutine { c ->
+    override suspend fun parseTextContent(body: Element): TextContentRoot = suspendCancellableCoroutine { c ->
         try {
-            val temp = mutableSetOf<TextContent>()
+            val temp = mutableListOf<TextContent>()
             val content = body.selectFirst("div.container.exb_bg div.textcontent.maincont")
             for (item in content.children()) {
                 when (item.tagName()) {
-                    "h3", "h2", "h1", "p" -> temp.add(TextContent(content = item.text(), contents = emptySet(), type = TextContent.STRING))
+                    "h3", "h2", "h1", "p" -> temp.add(TextContent(content = item.text(), type = TextContent.STRING))
                     "div" -> {
                         val contentElement = item.selectFirst("div.ouradvantagesblock")
                         when {
-                            contentElement != null -> temp.add(TextContent(content = "", contents = parseTextContentHelper(contentElement), type = TextContent.LIST))
-                            else -> temp.add(TextContent(content = "", contents = parseTextContentHelper(item), type = TextContent.LIST))
+                            contentElement != null -> temp.add(TextContent(content = item.text(), contents = parseTextContentHelper(contentElement), type = TextContent.LIST))
+                            else -> temp.add(TextContent(content = item.text(), contents = parseTextContentHelper(item), type = TextContent.LIST))
                         }
                     }
                     "ul" -> {
                         val tempChild = item.children()
-                            .map { it.text() }
-                            .toSet()
-                        temp.add(TextContent(content = "", contents = tempChild, type = TextContent.LIST))
+                            .map { TextContentChildData(it.text()) }
+                            .toList()
+                        temp.add(TextContent(content = item.text(), contents = TextContentChild(data = tempChild), type = TextContent.LIST))
                     }
-                    else -> println("Tag not find! $item")
+                    else -> tracker.event(TAG, "parseTextContent error! Tag not find! $item")
                 }
             }
+            c.resume(TextContentRoot(items = temp))
         } catch (ex: Exception) {
             tracker.event(TAG, "parseTextContent error!", ex)
-            c.resume(emptySet())
+            c.resume(TextContentRoot(errorStatus = true, errorMessage = ex.message ?: "Что то пошло не так! :("))
         }
+    }
+
+    private fun parseTextContentHelper(element: Element?): TextContentChild = when {
+        element != null -> {
+            val temp = mutableListOf<TextContentChildData>()
+            element.selectFirst("div.ouradvleft.floatL ul")
+                .children()
+                .mapTo(temp, { e ->  TextContentChildData(e.text()) })
+                .toList()
+            TextContentChild(data = temp)
+        }
+        else -> TextContentChild(errorStatus = true, errorMessage = "Не удалось распарсить данные!")
     }
 
     private fun parseNewsInfoBlock(element: Element): NewsInfoBlock {
@@ -201,18 +221,15 @@ class HomePageParserImpl(private val tracker: Tracker) : HomePageParser {
         }
     }
 
-    private fun parseTextContentHelper(element: Element?): Set<String> {
-        val temp = mutableSetOf<String>()
-        element?.selectFirst("div.ouradvleft.floatL ul")?.let {
-            it.children().mapTo(temp) { e -> e.text() }
-        }
-        return temp
-    }
+
 
     private fun getUrlAndTitle(element: Element): Pair<String, String> = Pair(element.attr("href"), element.text())
 
     companion object {
         private const val TAG = "HomePageParser"
+
+        const val JO_ERROR_STATUS_KEY = "is_error"
+        const val JO_ERROR_MESSAGE_KEY = "error_message"
     }
 
 }
