@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="@dimen/dp8"
+                  android:orientation="horizontal">
+
+        <ImageButton android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_margin="@dimen/dp8"
+                     app:srcCompat="@drawable/ic_close_black_24dp"/>
+
+    </LinearLayout>
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp">
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="top|start"
+                  android:layout_marginStart="24dp"
+                  android:textSize="36sp"
+                  android:textStyle="bold|italic"
+                  android:textColor="@color/textColor"
+                  android:text="ООО Балт Тур"/>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical"
+                      android:layout_marginStart="@dimen/dp16"
+                      android:layout_gravity="center|bottom">
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginStart="8dp"
+                      android:textStyle="bold|italic"
+                      android:textColor="@color/textColor"
+                      android:text="Режим работы"/>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          android:layout_marginStart="4dp"
+                          android:layout_gravity="center_horizontal">
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_marginStart="8dp"
+                          android:textStyle="bold|italic"
+                          android:textSize="12sp"
+                          android:textColor="@color/textColor"
+                          android:text="Пн-Пт:	11:00 – 19:00"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_marginStart="8dp"
+                          android:textStyle="bold|italic"
+                          android:textSize="12sp"
+                          android:textColor="@color/textColor"
+                          android:text="Сб:	12:00 – 16:00"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_marginStart="8dp"
+                          android:textStyle="bold|italic"
+                          android:textSize="12sp"
+                          android:textColor="@android:color/holo_red_dark"
+                          android:text="Вс:	выходной"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </FrameLayout>
+
+
+
+</LinearLayout>

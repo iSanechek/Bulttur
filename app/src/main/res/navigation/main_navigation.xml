@@ -8,6 +8,20 @@
               android:name="com.isanechek.balttur.fragments.home.HomeFragment"
               android:label="@string/title_home" >
 
+        <action android:id="@+id/go_from_home_to_license"
+                app:destination="@id/license_screen" />
+
+        <action android:id="@+id/go_from_home_to_info"
+                app:destination="@id/call_screen" />
+
     </fragment>
+
+    <fragment android:id="@+id/license_screen"
+              android:name="com.isanechek.balttur.fragments.license.LicenseFragment"
+              android:label="License"/>
+
+    <fragment android:id="@+id/call_screen"
+              android:name="com.isanechek.balttur.fragments.info.InfoFragment"
+              android:label="Call"/>
 
 </navigation>

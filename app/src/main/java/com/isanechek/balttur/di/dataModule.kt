@@ -1,5 +1,7 @@
 package com.isanechek.balttur.di
 
+import android.content.Context
+import android.content.SharedPreferences
 import com.isanechek.balttur.data.NetworkClient
 import com.isanechek.balttur.data.NetworkClientImpl
 import com.isanechek.balttur.data.PlatformContract
@@ -13,6 +15,7 @@ import com.isanechek.balttur.utils.TrackerImpl
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
+import org.koin.dsl.bind
 import org.koin.dsl.module
 import java.io.File
 import java.util.concurrent.TimeUnit
@@ -23,6 +26,12 @@ private fun createOkHttpClient(): OkHttpClient = OkHttpClient.Builder()
     .build()
 
 val dataModule = module {
+
+    single {
+        androidApplication()
+            .applicationContext
+            .getSharedPreferences("balttur", Context.MODE_PRIVATE)
+    } bind (SharedPreferences::class)
 
     single {
         createOkHttpClient()
@@ -47,6 +56,6 @@ val dataModule = module {
     }
 
     single<PlatformContract> {
-        PlatformContractImpl(androidContext())
+        PlatformContractImpl(androidContext(), get())
     }
 }

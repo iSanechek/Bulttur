@@ -54,6 +54,9 @@ android {
             outputFileName = "${fileNaming}-${versionMajor}.${versionMinor}.${versionPatch}.apk"
         }
     }
+    androidExtensions {
+        experimental = true
+    }
 }
 
 dependencies {
