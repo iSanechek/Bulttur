@@ -6,6 +6,7 @@ import android.view.ViewGroup
 
 typealias _layout = R.layout
 typealias _id = R.id
+typealias _drawable = R.drawable
 
 infix fun ViewGroup.inflate(layoutResId: Int): View =
     LayoutInflater.from(context).inflate(layoutResId, this, false)
