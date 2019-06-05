@@ -18,7 +18,7 @@ class TrackerImpl : Tracker {
         if (BuildConfig.DEBUG) {
             when {
                 exception != null -> Log.e("Balttur", "$tag -> $msg", exception)
-                else -> Log.d("Balttur", "$tag -> $msg")
+                else -> Log.e("Balttur", "$tag -> $msg")
             }
         }
     }

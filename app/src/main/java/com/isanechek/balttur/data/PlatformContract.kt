@@ -9,9 +9,19 @@ interface PlatformContract {
     fun getPathCacheFolder(): String
     val isLicenseShow: Boolean
     fun licenseMarkNotShow()
+    fun getData(key: String): Set<String>
+    fun saveData(key: String, data: Set<String>)
 }
 
 class PlatformContractImpl(private val context: Context, private val pref: SharedPreferences) : PlatformContract {
+
+    override fun getData(key: String): Set<String> = pref.getStringSet(key, emptySet()) ?: emptySet()
+
+    override fun saveData(key: String, data: Set<String>) {
+        pref.edit {
+            putStringSet(key, data)
+        }
+    }
 
     override fun licenseMarkNotShow() {
         pref.edit {

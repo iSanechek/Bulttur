@@ -14,6 +14,9 @@
         <action android:id="@+id/go_from_home_to_info"
                 app:destination="@id/call_screen" />
 
+        <action android:id="@+id/go_from_home_to_country"
+                app:destination="@id/country_screen" />
+
     </fragment>
 
     <fragment android:id="@+id/license_screen"
@@ -23,5 +26,9 @@
     <fragment android:id="@+id/call_screen"
               android:name="com.isanechek.balttur.fragments.info.InfoFragment"
               android:label="Call"/>
+
+    <fragment android:id="@+id/country_screen"
+              android:name="com.isanechek.balttur.fragments.country.CountryFragment"
+              android:label="Country"/>
 
 </navigation>

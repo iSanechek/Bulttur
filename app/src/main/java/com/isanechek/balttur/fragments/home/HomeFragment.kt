@@ -34,6 +34,7 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        tracker.event("HomeFragment", "Открыт домашний экран.")
         createTablesUi()
         if (platform.isLicenseShow) {
             findNavController().navigate(_id.go_from_home_to_license)
@@ -59,9 +60,14 @@ class HomeFragment : BaseFragment() {
             val p = LinearLayout.LayoutParams(mp, mp, 1f)
             p.setMargins(4, 4, 4, 4)
             card.layoutParams = p
-            card.radius = 8f
+            card.radius = 16f
             card.addView(root)
-
+            root.onClick {
+                when(item.id) {
+                    HomeMenuItem.COUNTRY_ID -> goToScreen(_id.go_from_home_to_country)
+                    else -> tracker.event("", "Не знаю на какой экран переходить. :(")
+                }
+            }
 
             if (i > 2) {
                 home_table_top_container.addView(card)
@@ -69,6 +75,11 @@ class HomeFragment : BaseFragment() {
                 home_table_bottom_container.addView(card)
             }
         }
+    }
+
+    private fun goToScreen(id: Int) {
+        tracker.event("HomeFragment", "OpenId $id")
+        findNavController().navigate(id)
     }
 
 }
