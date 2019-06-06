@@ -11,9 +11,20 @@ interface PlatformContract {
     fun licenseMarkNotShow()
     fun getData(key: String): Set<String>
     fun saveData(key: String, data: Set<String>)
+    fun getLastTimeUpdate(key: String): Long
+    fun setLastTimeUpdate(key: String, time: Long)
 }
 
 class PlatformContractImpl(private val context: Context, private val pref: SharedPreferences) : PlatformContract {
+
+    override fun getLastTimeUpdate(key: String): Long = pref.getLong(key, 0L)
+
+    override fun setLastTimeUpdate(key: String, time: Long) {
+        pref.edit {
+            putLong(key, time)
+        }
+    }
+
 
     override fun getData(key: String): Set<String> = pref.getStringSet(key, emptySet()) ?: emptySet()
 

@@ -1,11 +1,9 @@
 package com.isanechek.balttur.data.models
 
-import com.google.gson.annotations.SerializedName
-
 data class TextContent(
-    @SerializedName("content") val content: String = "",
-    @SerializedName("contents") val contents: TextContentChild = TextContentChild.toEmpty(),
-    @SerializedName("type") val type: String = ""
+    val content: String = "",
+    val contents: TextContentChild = TextContentChild.toEmpty(),
+    val type: String = ""
 ) {
 
     companion object {

@@ -1,21 +1,17 @@
 package com.isanechek.balttur.fragments.home
 
+import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.card.MaterialCardView
-import com.isanechek.balttur._drawable
-import com.isanechek.balttur._id
-import com.isanechek.balttur._layout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
+import com.isanechek.balttur.*
 import com.isanechek.balttur.data.models.HomeMenuItem
 import com.isanechek.balttur.fragments.BaseFragment
-import com.isanechek.balttur.onClick
+import com.smarteist.autoimageslider.IndicatorAnimations
+import com.smarteist.autoimageslider.SliderAnimations
 import kotlinx.android.synthetic.main.home_fragment_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -35,51 +31,102 @@ class HomeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         tracker.event("HomeFragment", "Открыт домашний экран.")
-        createTablesUi()
+        setupUi()
+        vm.load()
+        val menuAdapter = HomeMenuAdapter { menuItem ->
+            when(menuItem.id) {
+                HomeMenuItem.COUNTRY_ID -> goToScreen(_id.go_from_home_to_country)
+                else -> tracker.event("", "Не знаю на какой экран переходить. :(")
+            }
+        }
+        menuAdapter.submit(data)
+        with(menu_list) {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            adapter = menuAdapter
+        }
         if (platform.isLicenseShow) {
             findNavController().navigate(_id.go_from_home_to_license)
         }
-    }
 
+        val newsAdapter = HomeNewsAdapter { newsItem ->
 
-    private fun createTablesUi() {
-        for (i in 0 until data.size) {
-            val item = data[i]
-            val root = LayoutInflater.from(requireContext()).inflate(_layout.home_table_item_layout, null)
-            val container = root.findViewById<FrameLayout>(_id.home_table_container)
-            container.onClick {
+        }
 
-            }
-            val icon = root.findViewById<ImageView>(_id.home_table_icon)
-            icon.setImageDrawable(ContextCompat.getDrawable(requireContext(), item.iconId))
-            val title = root.findViewById<TextView>(_id.home_table_title)
-            title.text = item.title
+        home_news_pager.apply {
+            sliderAdapter = newsAdapter
+            setIndicatorAnimation(IndicatorAnimations.COLOR)
+            sliderIndicatorSelectedColor = Color.WHITE
+            sliderIndicatorUnselectedColor = Color.GRAY
+            setSliderTransformAnimation(SliderAnimations.CUBEOUTDEPTHTRANSFORMATION)
+            scrollTimeInSec = 5
+            setOnIndicatorClickListener { position ->
 
-            val card = MaterialCardView(requireContext())
-            val mp = FrameLayout.LayoutParams.MATCH_PARENT
-            val p = LinearLayout.LayoutParams(mp, mp, 1f)
-            p.setMargins(4, 4, 4, 4)
-            card.layoutParams = p
-            card.radius = 16f
-            card.addView(root)
-            root.onClick {
-                when(item.id) {
-                    HomeMenuItem.COUNTRY_ID -> goToScreen(_id.go_from_home_to_country)
-                    else -> tracker.event("", "Не знаю на какой экран переходить. :(")
-                }
-            }
-
-            if (i > 2) {
-                home_table_top_container.addView(card)
-            } else {
-                home_table_bottom_container.addView(card)
             }
         }
+
+        vm.newsData.observe(this, Observer { data ->
+            if (data != null) {
+                newsAdapter.submit(data)
+            }
+        })
+
+        val toursAdapter = ToursInfoAdapter { toursItem ->
+
+        }
+
+        home_tours_pager.apply {
+            sliderAdapter = toursAdapter
+            setIndicatorAnimation(IndicatorAnimations.COLOR)
+            sliderIndicatorSelectedColor = Color.WHITE
+            sliderIndicatorUnselectedColor = Color.GRAY
+            setSliderTransformAnimation(SliderAnimations.CUBEOUTDEPTHTRANSFORMATION)
+            scrollTimeInSec = 5
+            setOnIndicatorClickListener { position ->
+
+            }
+        }
+
+        vm.toursData.observe(this, Observer { data ->
+            if (data != null) {
+                toursAdapter.submit(data)
+            }
+        })
+
+        vm.progressState.observe(this, Observer { status ->
+            if (status) {
+                home_update_btn.hideWithAlpha(150)
+                home_progress.showWithAlpha(150)
+            } else {
+                home_progress.hideWithAlpha(150)
+                home_update_btn.showWithAlpha(150)
+            }
+        })
+
+        home_search_container.onClick {
+            // open search screen
+        }
+
+        home_update_btn.onClick {
+            vm.load(true)
+        }
+
+        home_menu_info.onClick {
+            goToScreen(_id.go_from_home_to_dev)
+        }
     }
+
 
     private fun goToScreen(id: Int) {
         tracker.event("HomeFragment", "OpenId $id")
         findNavController().navigate(id)
+    }
+
+    private fun setupUi() {
+        home_title.showWithAlpha(250)
+        home_beta.showWithAlpha(350)
+        home_menu_info.showWithAlpha(270)
+        home_update_btn.showWithAlpha(280)
     }
 
 }

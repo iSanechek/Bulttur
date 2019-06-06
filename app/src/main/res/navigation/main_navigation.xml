@@ -17,6 +17,9 @@
         <action android:id="@+id/go_from_home_to_country"
                 app:destination="@id/country_screen" />
 
+        <action android:id="@+id/go_from_home_to_dev"
+                app:destination="@id/dev_info_screen" />
+
     </fragment>
 
     <fragment android:id="@+id/license_screen"
@@ -30,5 +33,13 @@
     <fragment android:id="@+id/country_screen"
               android:name="com.isanechek.balttur.fragments.country.CountryFragment"
               android:label="Country"/>
+
+    <fragment android:id="@+id/dev_info_screen"
+              android:name="com.isanechek.balttur.fragments.appinfo.AppInfoFragment"
+              android:label="DevInfo"/>
+
+    <fragment android:id="@+id/dev_info_search"
+              android:name="com.isanechek.balttur.fragments.search.SearchFragment"
+              android:label="Search"/>
 
 </navigation>
