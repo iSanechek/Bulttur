@@ -16,7 +16,7 @@ interface ToursDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(items: List<ToursInfoEntity>)
 
-    @Query("DELETE FROM tours_info")
+    @Query("TRUNCATE TABLE tours_info")
     suspend fun clear()
 
     @Query("SELECT count(*) FROM tours_info")

@@ -97,8 +97,10 @@ class HomeViewModel(
                         update -> {
                             newsDao.update(newsData)
                             toursDao.update(toursInfoData)
+                            tracker.event("TEST", ">>>UPDATE<<<")
                         }
                         else -> {
+                            tracker.event("TEST", ">>>INSERT<<<")
                             newsDao.insert(newsData)
                             toursDao.insert(toursInfoData)
 

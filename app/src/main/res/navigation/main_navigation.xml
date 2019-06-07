@@ -20,6 +20,13 @@
         <action android:id="@+id/go_from_home_to_dev"
                 app:destination="@id/dev_info_screen" />
 
+        <action android:id="@+id/go_from_home_to_search"
+                app:destination="@id/dev_info_screen"
+                app:enterAnim="@anim/slide_in_down"
+                app:exitAnim="@anim/exit_from_right"
+                app:popEnterAnim="@anim/slide_in_down"
+                app:popExitAnim="@anim/exit_from_right" />
+
     </fragment>
 
     <fragment android:id="@+id/license_screen"

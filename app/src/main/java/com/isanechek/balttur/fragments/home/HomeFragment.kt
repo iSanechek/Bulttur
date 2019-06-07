@@ -73,6 +73,8 @@ class HomeFragment : BaseFragment() {
 
         val toursAdapter = ToursInfoAdapter { toursItem ->
 
+
+
         }
 
         home_tours_pager.apply {
@@ -105,6 +107,7 @@ class HomeFragment : BaseFragment() {
 
         home_search_container.onClick {
             // open search screen
+            goToScreen(_id.go_from_home_to_search)
         }
 
         home_update_btn.onClick {
