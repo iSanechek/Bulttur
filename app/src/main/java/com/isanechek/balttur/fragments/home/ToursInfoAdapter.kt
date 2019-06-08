@@ -36,6 +36,7 @@ class ToursInfoAdapter(private val callback: (ToursInfoEntity) -> Unit) : Slider
                 callback(item)
             }
             home_tours_item_title.text = item.bigTitle
+            home_tours_item_price.text = item.price
         }
     }
 }

@@ -6,7 +6,6 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewpager2.widget.ViewPager2
 import com.isanechek.balttur.*
 import com.isanechek.balttur.data.models.HomeMenuItem
 import com.isanechek.balttur.fragments.BaseFragment
@@ -23,7 +22,6 @@ class HomeFragment : BaseFragment() {
         HomeMenuItem(HomeMenuItem.COUNTRY_ID, "Страны", iconId = _drawable.ic_place_black_24dp),
         HomeMenuItem(HomeMenuItem.NEWS_ID, "Новости", iconId = _drawable.ic_local_library_black_24dp),
         HomeMenuItem(HomeMenuItem.TOUR_ID, "Туры", iconId = _drawable.ic_pool_black_24dp),
-        HomeMenuItem(HomeMenuItem.CALL_ID, "Связь", iconId = _drawable.ic_perm_phone_msg_black_24dp),
         HomeMenuItem(HomeMenuItem.ABOUT_COMPANY_ID, "О компании", iconId = _drawable.ic_info_outline_black_24dp))
 
     override fun getLayout(): Int = _layout.home_fragment_layout
@@ -35,7 +33,10 @@ class HomeFragment : BaseFragment() {
         vm.load()
         val menuAdapter = HomeMenuAdapter { menuItem ->
             when(menuItem.id) {
-                HomeMenuItem.COUNTRY_ID -> goToScreen(_id.go_from_home_to_country)
+                HomeMenuItem.COUNTRY_ID -> openTab(requireContext(), "https://balttur.spb.ru/countries/")
+                HomeMenuItem.NEWS_ID -> openTab(requireContext(), "https://balttur.spb.ru/tourists/news/")
+                HomeMenuItem.TOUR_ID -> openTab(requireContext(), "https://balttur.spb.ru/tours/")
+                HomeMenuItem.ABOUT_COMPANY_ID -> openTab(requireContext(), "https://balttur.spb.ru/about-company/about-us/")
                 else -> tracker.event("", "Не знаю на какой экран переходить. :(")
             }
         }
@@ -50,19 +51,16 @@ class HomeFragment : BaseFragment() {
         }
 
         val newsAdapter = HomeNewsAdapter { newsItem ->
-
+        	openTab(requireContext(), "https://balttur.spb.ru${newsItem.link}")
         }
 
         home_news_pager.apply {
             sliderAdapter = newsAdapter
             setIndicatorAnimation(IndicatorAnimations.COLOR)
-            sliderIndicatorSelectedColor = Color.WHITE
-            sliderIndicatorUnselectedColor = Color.GRAY
+            sliderIndicatorSelectedColor = R.color.colorAccent
+            sliderIndicatorUnselectedColor = Color.WHITE
             setSliderTransformAnimation(SliderAnimations.CUBEOUTDEPTHTRANSFORMATION)
             scrollTimeInSec = 5
-            setOnIndicatorClickListener { position ->
-
-            }
         }
 
         vm.newsData.observe(this, Observer { data ->
@@ -72,21 +70,17 @@ class HomeFragment : BaseFragment() {
         })
 
         val toursAdapter = ToursInfoAdapter { toursItem ->
-
-
+        	openTab(requireContext(), "https://balttur.spb.ru${toursItem.bigUrl}")
 
         }
 
         home_tours_pager.apply {
             sliderAdapter = toursAdapter
             setIndicatorAnimation(IndicatorAnimations.COLOR)
-            sliderIndicatorSelectedColor = Color.WHITE
-            sliderIndicatorUnselectedColor = Color.GRAY
+            sliderIndicatorSelectedColor = R.color.colorAccent
+            sliderIndicatorUnselectedColor = Color.WHITE
             setSliderTransformAnimation(SliderAnimations.CUBEOUTDEPTHTRANSFORMATION)
             scrollTimeInSec = 5
-            setOnIndicatorClickListener { position ->
-
-            }
         }
 
         vm.toursData.observe(this, Observer { data ->
@@ -107,7 +101,7 @@ class HomeFragment : BaseFragment() {
 
         home_search_container.onClick {
             // open search screen
-            goToScreen(_id.go_from_home_to_search)
+            openTab(requireContext(), "https://balttur.spb.ru/search/?q")
         }
 
         home_update_btn.onClick {
@@ -115,7 +109,8 @@ class HomeFragment : BaseFragment() {
         }
 
         home_menu_info.onClick {
-            goToScreen(_id.go_from_home_to_dev)
+            // goToScreen(_id.go_from_home_to_dev)
+            openTab(requireContext(), "https://averd-soft.ru/ru/about.php")
         }
     }
 

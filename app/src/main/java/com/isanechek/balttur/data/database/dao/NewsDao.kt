@@ -16,7 +16,7 @@ interface NewsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(items: List<NewsEntity>)
 
-    @Query("TRUNCATE TABLE news")
+    @Query("DELETE FROM news")
     suspend fun clear()
 
     @Query("SELECT count(*) FROM news")
