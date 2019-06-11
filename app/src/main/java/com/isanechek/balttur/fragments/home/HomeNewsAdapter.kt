@@ -28,6 +28,9 @@ class HomeNewsAdapter(private val callback: (NewsEntity) -> Unit) : SliderViewAd
     }
 
     fun submit(data: List<NewsEntity>) {
+        if (items.isNotEmpty()) {
+            items.clear()
+        }
         items.addAll(data)
         notifyDataSetChanged()
     }

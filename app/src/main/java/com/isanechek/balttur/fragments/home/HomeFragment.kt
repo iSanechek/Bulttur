@@ -123,8 +123,8 @@ class HomeFragment : BaseFragment() {
     private fun setupUi() {
         home_title.showWithAlpha(250)
         home_beta.showWithAlpha(350)
-        home_menu_info.showWithAlpha(270)
-        home_update_btn.showWithAlpha(280)
+        // home_menu_info.showWithAlpha(270)
+        // home_update_btn.showWithAlpha(280)
     }
 
 }

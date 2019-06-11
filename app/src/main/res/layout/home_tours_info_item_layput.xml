@@ -8,15 +8,23 @@
         android:id="@+id/home_tours_item_container"
         app:cardCornerRadius="@dimen/dp8">
 
-    <FrameLayout android:layout_width="match_parent"
-                  android:layout_height="match_parent">
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
 
         <TextView
                 android:id="@+id/home_tours_item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
                 android:layout_marginTop="@dimen/dp16"
+                android:layout_marginStart="@dimen/dp16"
+                android:layout_marginEnd="@dimen/dp16"
+                android:maxLines="3"
+                android:ellipsize="end"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@color/textColor"
@@ -27,12 +35,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="4dp"
                 android:textSize="16sp"
                 android:textStyle="normal"
                 android:textColor="@color/textColor"
                 tools:text="@tools:sample/full_names"/>
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/home_tours_item_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp8"
+                android:text="Подробнее"
+                app:cornerRadius="@dimen/dp16"/>
 
-    </FrameLayout>
+    </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

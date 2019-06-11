@@ -22,4 +22,9 @@
         <attr name="isLooped" format="boolean"/>
         <attr name="isAnimatedByWord" format="boolean"/>
     </declare-styleable>
+
+    <declare-styleable name="ToolbarX">
+        <attr name="toolbarX_animationDuration" format="integer" />
+        <attr name="toolbarX_showElevationAtStart" format="boolean" />
+    </declare-styleable>
 </resources>

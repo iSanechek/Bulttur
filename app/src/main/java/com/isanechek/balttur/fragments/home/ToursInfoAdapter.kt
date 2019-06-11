@@ -25,6 +25,9 @@ class ToursInfoAdapter(private val callback: (ToursInfoEntity) -> Unit) : Slider
     }
 
     fun submit(data: List<ToursInfoEntity>) {
+        if (items.isNotEmpty()) {
+            items.clear()
+        }
         items.addAll(data)
         notifyDataSetChanged()
     }
@@ -32,7 +35,7 @@ class ToursInfoAdapter(private val callback: (ToursInfoEntity) -> Unit) : Slider
     inner class ToursInfoVH(override val containerView: View) : SliderViewAdapter.ViewHolder(containerView), LayoutContainer {
 
         fun bindTo(item: ToursInfoEntity, callback: (ToursInfoEntity) -> Unit) {
-            home_tours_item_container.onClick {
+            home_tours_item_description.onClick {
                 callback(item)
             }
             home_tours_item_title.text = item.bigTitle

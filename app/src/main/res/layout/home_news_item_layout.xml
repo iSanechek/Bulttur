@@ -15,24 +15,41 @@
             android:scaleType="centerCrop"
             tools:src="@tools:sample/avatars"/>
 
-    <FrameLayout android:layout_width="match_parent"
-                 android:layout_height="60dp"
-                 android:layout_gravity="bottom"
-                 android:background="@drawable/home_news_cover_background">
+    <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:orientation="horizontal"
+                      android:layout_gravity="center">
 
-        <TextView
+        <View android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_weight="0.9" 
+                 android:background="#FFFFFF" />
+
+        <View 
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.1"
+            android:background="@drawable/home_news_cover_background"/>
+
+
+                          
+    </LinearLayout>
+
+    <TextView
                 android:id="@+id/home_news_item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start|top"
-                android:layout_marginStart="@dimen/dp8"
-                android:layout_marginTop="10dp"
-                android:textSize="18sp"
+                android:layout_gravity="start|center"
+                android:gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="24dp"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:maxLines="1"
+                android:maxLines="3"
                 android:ellipsize="end"
                 android:textColor="@color/textColor"
                 tools:text="@tools:sample/full_names"/>
-    </FrameLayout>
+
+    
 
 </FrameLayout>

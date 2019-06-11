@@ -94,6 +94,7 @@ dependencies {
     implementation 'me.toptas.fancyshowcase:fancyshowcaseview:1.1.5'
     implementation 'saschpe.android:customtabs:2.0.0'
     implementation 'com.afollestad.material-dialogs:core:3.0.0-rc2'
+    implementation 'com.github.florent37:shapeofview:1.4.7'
 
     def room_version = "2.1.0-rc01"
     implementation "androidx.room:room-runtime:$room_version"
