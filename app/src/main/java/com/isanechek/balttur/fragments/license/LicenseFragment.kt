@@ -4,6 +4,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.Html
+import android.graphics.Color
+import com.squareup.picasso.Picasso
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.isanechek.balttur.R
@@ -23,6 +25,10 @@ class LicenseFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        Picasso.get()
+            .load(R.drawable.lic_icon)
+            .into(lic_icon_iv)
+
         license_ok.onClick {
             platform.licenseMarkNotShow()
             findNavController().navigateUp()
@@ -38,10 +44,10 @@ class LicenseFragment : BaseFragment() {
     private fun getLinks(): List<Link> {
 
         val ok = Link("Я согласен")
-        ok.setTextColor(R.color.colorAccent)
+        ok.setTextColor(Color.parseColor("#F4511E"))
 
         val averd = Link("AverdSoft")
-        averd.setTextColor(R.color.colorAccent)
+        averd.setTextColor(Color.parseColor("#F4511E"))
         averd.setOnClickListener(object: Link.OnClickListener {
             override fun onClick(clickedText: String) {
                 openLink(AVERD_LINK)
@@ -49,7 +55,7 @@ class LicenseFragment : BaseFragment() {
         })
 
         val balttur = Link("БалтТур")
-        balttur.setTextColor(R.color.colorAccent)
+        balttur.setTextColor(Color.parseColor("#F4511E"))
         balttur.setOnClickListener(object: Link.OnClickListener {
             override fun onClick(clickedText: String) {
                 openLink(BALTTUR_LINK)

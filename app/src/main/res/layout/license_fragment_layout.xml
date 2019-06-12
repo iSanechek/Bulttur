@@ -14,7 +14,7 @@
         <ImageView android:layout_width="115dp"
                    android:layout_height="115dp"
                    android:layout_gravity="center_horizontal"
-                   android:src="@mipmap/ic_launcher"
+                   android:id="@+id/lic_icon_iv"
                    android:padding="@dimen/dp16"
                    android:background="@drawable/license_circle_icon_background"/>
 
@@ -44,7 +44,6 @@
                     android:textStyle="normal"
                     android:textSize="12sp"
                     android:textColor="#F4511E"
-                    android:visibility="invisible"
                     android:text="(beta)"/>
         </LinearLayout>
 
@@ -65,6 +64,7 @@
                 android:layout_marginBottom="32dp"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
+                android:textColor="#ffffff"
                 tools:text="Нажимая кнопку Я СОГЛАСЕН, Вы соглашаетесь с лицензионом соглашение AverdSoft и Балт Тур "/>
 
         <com.google.android.material.button.MaterialButton
