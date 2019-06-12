@@ -16,10 +16,10 @@ android {
     compileSdkVersion rootProject.compileSdkVersion
     def appId = "com.averdsoft.balttur"
     def fileNaming = "apk/Balttur"
-    def versionNumber = 4
+    def versionNumber = 5
     def versionMajor = "0"
     def versionMinor = "2"
-    def versionPatch = "0"
+    def versionPatch = "1"
     def versionBuild = -1
     def versionPropsFile = file('version.properties')
     if (versionPropsFile.canRead()) {
