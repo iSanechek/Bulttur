@@ -11,17 +11,16 @@
             android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <com.isanechek.balttur.widgets.ToolbarX
-                android:id="@+id/dashboard_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_scrollFlags="scroll|enterAlways|snap"
-                app:toolbarX_animationDuration="300"/>
+        <include layout="@layout/custom_toolbar_layout"
+                 android:layout_width="match_parent"
+                 android:layout_height="?attr/actionBarSize"
+                 app:layout_scrollFlags="scroll|enterAlways|snap"
+                 app:toolbarX_animationDuration="300" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
-            android:id="@+id/dashboard_container"
+            android:id="@+id/dashboard_scroll_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
@@ -32,6 +31,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             app:srcCompat="@drawable/ic_local_phone_white_24dp"
-            app:layout_behavior=".utils.ScrollFABBehavior"/>
+            app:layout_behavior="com.isanechek.balttur.utils.ScrollFABBehavior"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

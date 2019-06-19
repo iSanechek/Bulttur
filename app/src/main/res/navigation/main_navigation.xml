@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/main_navigation"
-            app:startDestination="@id/dev_info_debug">
+            app:startDestination="@id/dashboard_screen">
 
     <fragment android:id="@+id/home_screen"
               android:name="com.isanechek.balttur.fragments.home.HomeFragment"
@@ -52,5 +52,9 @@
     <fragment android:id="@+id/dev_info_debug"
               android:name="com.isanechek.balttur.debug.DebugFragment"
               android:label="Search"/>
+
+    <fragment android:id="@+id/dashboard_screen"
+              android:name="com.isanechek.balttur.fragments.dashboard.DashboardFragment"
+              android:label="Dashboard"/>
 
 </navigation>
