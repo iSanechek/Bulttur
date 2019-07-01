@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import com.isanechek.balttur.R
 import com.isanechek.balttur._drawable
 import com.isanechek.balttur.data.PlatformContract
+import com.isanechek.balttur.utils.DialogUtils
 import com.isanechek.balttur.utils.Tracker
 import org.koin.android.ext.android.inject
 import saschpe.android.customtabs.CustomTabsHelper
@@ -25,6 +26,7 @@ abstract class BaseFragment : Fragment() {
 
     val tracker: Tracker by inject()
     val platform: PlatformContract by inject()
+    val dialogUtils: DialogUtils by inject()
 
     abstract fun getLayout(): Int
 

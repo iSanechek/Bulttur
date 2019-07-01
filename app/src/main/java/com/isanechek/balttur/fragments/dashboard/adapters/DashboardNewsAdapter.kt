@@ -1,18 +1,18 @@
-package com.isanechek.balttur.fragments.dashboard
+package com.isanechek.balttur.fragments.dashboard.adapters
 
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
-import androidx.core.view.drawToBitmap
-import androidx.palette.graphics.Palette
+import androidx.core.graphics.toColorInt
 import androidx.recyclerview.widget.RecyclerView
 import com.isanechek.balttur.*
 import com.isanechek.balttur.data.database.entity.NewsEntity
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.dashboard_news_item_layout.*
-import java.lang.Exception
 
 class DashboardNewsAdapter(private val callback: (NewsEntity) -> Unit) : RecyclerView.Adapter<DashboardNewsAdapter.DashboardNewsVh>() {
 
@@ -36,32 +36,48 @@ class DashboardNewsAdapter(private val callback: (NewsEntity) -> Unit) : Recycle
     inner class DashboardNewsVh(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         fun bindTo(item: NewsEntity, callback: (NewsEntity) -> Unit) {
-            dashboard_news_item_container.onClick { callback(item) }
-            Picasso.get().load("$BASE_URL${item.imgUrl}").into(dashboard_news_item_iv)
-//            Picasso.get().load("$BASE_URL${item.imgUrl}").into(dashboard_news_item_iv, object: Callback {
-//                override fun onSuccess() {
-//                    val bitmap = dashboard_news_item_iv.drawToBitmap()
-//                    Palette.from(bitmap).generate {  palette ->
-//                        val vibrant = palette?.darkVibrantSwatch
-//                        dashboard_news_item_bg.setBackgroundColor(vibrant?.rgb ?: ContextCompat.getColor(dashboard_news_item_bg.context, _color.colorAccent))
-//                        with(dashboard_news_item_title) {
-//                            text = item.title
-//                            setTextColor(vibrant?.titleTextColor ?: ContextCompat.getColor(dashboard_news_item_bg.context, _color.textColor))
-//                        }
+            dashboard_news_item_container.onClick {
+                callback(item)
+            }
+//            CustomShape.bindBg(dashboard_news_item_background, "#F44336".toColorInt())
 //
-//                    }
-//                }
-//
-//                override fun onError(e: Exception?) {
-//                    dashboard_news_item_bg.setBackgroundColor(ContextCompat.getColor(dashboard_news_item_bg.context, _color.colorAccent))
-//                    with(dashboard_news_item_title) {
-//                        text = item.title
-//                        setTextColor(ContextCompat.getColor(dashboard_news_item_bg.context, _color.textColor))
-//                    }
-//                }
-//
-//            })
+//            dashboard_news_item_iv.loadUrl("$BASE_URL${item.imgUrl}")
+//            with(dashboard_news_item_title) {
+//                text = item.title
+//                setTextColor("#000000".toColorInt())
+//            }
+
+            dashboard_news_item_iv.loadUrl("$BASE_URL${item.imgUrl}") {
+                onSuccess {
+                    dashboard_news_item_iv.generatePalette gen@ {
+                        val swatch = it?.darkMutedSwatch
+                        val backgroundColor = swatch?.rgb ?: getColor(_color.defaultItemBackground)
+                        val titleColor = swatch?.titleTextColor ?: getColor(_color.textDarkColor)
+
+//                        dashboard_news_item_iv.imageTintList = ColorStateList.valueOf(backgroundColor)
+
+//                        dashboard_news_item_background.setBackgroundColor(backgroundColor)
+                        Log.e("Hyi", "color $backgroundColor")
+                        CustomShape.bindBg(dashboard_news_item_background, backgroundColor)
+
+                        with(dashboard_news_item_title) {
+                            text = item.title
+                            setTextColor(getColor(_color.textColor))
+                        }
+                    }
+                }
+                onError {
+                    Log.e("Hyi", "color hyi")
+                    dashboard_news_item_iv.imageTintList = ColorStateList.valueOf(getColor(_color.defaultItemBackground))
+                    with(dashboard_news_item_title) {
+                        text = item.title
+                        setTextColor("000000".toColorInt())
+                    }
+                }
+            }
         }
+
+        private fun getColor(@ColorRes id: Int): Int = ContextCompat.getColor(itemView.context, id)
 
     }
 }

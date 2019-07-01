@@ -6,23 +6,47 @@
               android:layout_width="match_parent"
               android:layout_marginStart="@dimen/dp16"
               android:layout_marginEnd="@dimen/dp16"
-              android:layout_marginTop="@dimen/dp8"
+              android:layout_marginTop="@dimen/dp16"
               android:layout_marginBottom="@dimen/dp0"
               android:layout_height="180dp">
 
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="@dimen/dp8"
+                 android:layout_marginStart="14dp"
+                 android:layout_marginEnd="16dp"
+                 android:layout_marginBottom="@dimen/dp8">
 
-    <TextView
-            android:id="@+id/dashboard_news_item_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp8"
-            android:textSize="22sp"
-            android:text="Новости"
-            tools:text="@tools:sample/cities"/>
+        <TextView
+                android:id="@+id/dashboard_news_item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center"
+                android:textSize="32sp"
+                android:textColor="@color/textColor"
+                android:text="Новости"
+                android:textStyle="bold"
+                tools:text="@tools:sample/cities"/>
+
+        <!--Ниже будет дата последнего обновления-->
+
+        <!--<TextView-->
+                <!--android:id="@+id/dashboard_news_item_all_news"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="end|bottom"-->
+                <!--android:textSize="14sp"-->
+                <!--android:textColor="@color/textColor"-->
+                <!--android:text="Все новости"-->
+                <!--tools:text="@tools:sample/cities"/>-->
+
+    </FrameLayout>
 
     <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/dashboard_news_pager"
             android:layout_width="match_parent"
+            android:layout_marginStart="@dimen/dp8"
+            android:layout_marginEnd="@dimen/dp8"
             android:layout_height="150dp" />
 
     <com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
@@ -30,8 +54,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/dp8"
-            app:dotsColor="@color/colorAccent"/>
+            android:layout_marginTop="@dimen/dp4"
+            app:dotsSize="8dp"
+            app:dotsStrokeWidth="1dp"
+            app:dotsColor="#FFFFFF"/>
 
 
 </LinearLayout>

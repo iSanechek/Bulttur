@@ -10,6 +10,8 @@ import com.isanechek.balttur.data.PlatformContractImpl
 import com.isanechek.balttur.data.database.Database
 import com.isanechek.balttur.data.parsers.HomePageParser
 import com.isanechek.balttur.data.parsers.HomePageParserImpl
+import com.isanechek.balttur.utils.PrefUtils
+import com.isanechek.balttur.utils.PrefUtilsImpl
 import com.isanechek.balttur.utils.Tracker
 import com.isanechek.balttur.utils.TrackerImpl
 import okhttp3.OkHttpClient
@@ -31,6 +33,9 @@ val dataModule = module {
             .applicationContext
             .getSharedPreferences("balttur", Context.MODE_PRIVATE)
     } bind (SharedPreferences::class)
+
+
+    single<PrefUtils> { PrefUtilsImpl(get()) }
 
     single {
         createOkHttpClient()

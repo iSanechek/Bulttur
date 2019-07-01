@@ -1,7 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<com.google.android.material.card.MaterialCardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:id="@+id/dashboard_menu_item_container"
+        android:layout_marginStart="1dp"
+        app:cardCornerRadius="@dimen/dp2">
 
-</LinearLayout>
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:layout_gravity="center">
+
+        <FrameLayout
+                android:id="@+id/dashboard_menu_item_icon_bg"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="@drawable/license_circle_icon_background">
+
+            <ImageView
+                    android:id="@+id/dashboard_menu_item_icon"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:tint="@color/textColor"
+                    tools:src="@drawable/ic_info_outline_black_24dp"/>
+
+        </FrameLayout>
+
+        <TextView
+                android:id="@+id/dashboard_menu_item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:textSize="18sp"
+                android:textColor="@color/textColor"
+                tools:text="@tools:sample/cities"/>
+
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

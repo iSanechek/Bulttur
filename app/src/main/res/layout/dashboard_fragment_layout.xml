@@ -9,27 +9,34 @@
             android:id="@+id/dashboard_app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <include layout="@layout/custom_toolbar_layout"
                  android:layout_width="match_parent"
                  android:layout_height="?attr/actionBarSize"
-                 app:layout_scrollFlags="scroll|enterAlways|snap"
-                 app:toolbarX_animationDuration="300" />
+                 app:layout_scrollFlags="scroll|enterAlways|snap" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
-            android:id="@+id/dashboard_scroll_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <LinearLayout
+                android:id="@+id/dashboard_scroll_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/dashboard_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
+            android:layout_margin="@dimen/dp16"
+            android:elevation="@dimen/dp8"
             app:srcCompat="@drawable/ic_local_phone_white_24dp"
             app:layout_behavior="com.isanechek.balttur.utils.ScrollFABBehavior"/>
 

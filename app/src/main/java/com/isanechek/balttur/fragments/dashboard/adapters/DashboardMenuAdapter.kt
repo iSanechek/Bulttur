@@ -1,4 +1,4 @@
-package com.isanechek.balttur.fragments.dashboard
+package com.isanechek.balttur.fragments.dashboard.adapters
 
 import android.view.View
 import android.view.ViewGroup

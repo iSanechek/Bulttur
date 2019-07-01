@@ -5,7 +5,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/home_tours_item_container"
+        android:id="@+id/dashboard_tours_item_container"
         app:cardCornerRadius="@dimen/dp8">
 
     <LinearLayout
@@ -15,7 +15,7 @@
             android:orientation="vertical">
 
         <TextView
-                android:id="@+id/home_tours_item_title"
+                android:id="@+id/dashboard_tours_item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -27,25 +27,27 @@
                 android:ellipsize="end"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="@color/textColor"
+                android:textColor="@color/textDarkColor"
                 tools:text="@tools:sample/full_names"/>
 
         <TextView
-                android:id="@+id/home_tours_item_price"
+                android:id="@+id/dashboard_tours_item_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="4dp"
                 android:textSize="16sp"
                 android:textStyle="normal"
-                android:textColor="@color/textColor"
+                android:textColor="@color/textColorSecondary"
                 tools:text="@tools:sample/full_names"/>
+
         <com.google.android.material.button.MaterialButton
-                android:id="@+id/home_tours_item_description"
+                android:id="@+id/dashboard_tours_item_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/dp8"
+                android:textSize="18sp"
                 android:text="Подробнее"
                 app:cornerRadius="@dimen/dp16"/>
 

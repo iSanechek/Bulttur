@@ -12,7 +12,8 @@
 
         <ImageButton android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
-                     android:layout_margin="@dimen/dp8"
+                     android:layout_margin="@dimen/dp16"
+                     android:id="@+id/info_fragment_close_btn"
                      app:srcCompat="@drawable/ic_close_black_24dp"/>
 
     </LinearLayout>
