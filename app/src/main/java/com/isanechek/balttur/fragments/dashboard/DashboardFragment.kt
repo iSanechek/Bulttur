@@ -1,10 +1,14 @@
 package com.isanechek.balttur.fragments.dashboard
 
 import android.os.Bundle
+import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.TextSwitcher
+import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -22,15 +26,14 @@ import com.isanechek.balttur.fragments.BaseFragment
 import com.isanechek.balttur.fragments.dashboard.adapters.DashboardMenuAdapter
 import com.isanechek.balttur.fragments.dashboard.adapters.DashboardNewsAdapter
 import com.isanechek.balttur.fragments.dashboard.adapters.DashboardToursAdapter
-import com.isanechek.balttur.fragments.home.HomeViewModel
 import com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
-import kotlinx.android.synthetic.main.custom_toolbar_layout.*
 import kotlinx.android.synthetic.main.dashboard_fragment_layout.*
+import kotlinx.android.synthetic.main.dashboard_info_layout_container.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DashboardFragment : BaseFragment() {
 
-    private val vm: HomeViewModel by viewModel()
+    private val vm: DashboardViewModel by viewModel()
 
     private val layouts = listOf(
         _layout.dashboard_news_layout_container,
@@ -126,6 +129,28 @@ class DashboardFragment : BaseFragment() {
 
     private fun createInfoItem(root: View) {
         root.layoutParams = getParams(height = 180.px)
+
+
+        val switcher = root.findViewById<TextSwitcher>(_id.dashboard_info_item_switcher)
+        vm.loadInfoData()
+        switcher.apply {
+            setFactory { TextView(ContextThemeWrapper(requireContext(), R.style.DashboardInfoSubTitle)) }
+            animateFirstView = false
+            inAnimation = AnimationUtils.loadAnimation(requireContext(), _anim.slide_down)
+            outAnimation = AnimationUtils.loadAnimation(requireContext(), _anim.move_right)
+            setCurrentText("Автобусные туры по Европе")
+            onClick {
+                
+            }
+        }
+
+        vm.infoData.observe(this, Observer { text ->
+            if (text != null) {
+                switcher.setText(text)
+            }
+
+        })
+
         root.findViewById<MaterialButton>(_id.dashboard_info_item_filter).onClick {
             openUrl("https://balttur.spb.ru/filter/")
         }

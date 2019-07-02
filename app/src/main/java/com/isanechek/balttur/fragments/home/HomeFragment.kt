@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.isanechek.balttur.*
 import com.isanechek.balttur.data.models.HomeMenuItem
 import com.isanechek.balttur.fragments.BaseFragment
+import com.isanechek.balttur.fragments.dashboard.DashboardViewModel
 import com.smarteist.autoimageslider.IndicatorAnimations
 import com.smarteist.autoimageslider.SliderAnimations
 import kotlinx.android.synthetic.main.home_fragment_layout.*
@@ -16,7 +17,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment() {
 
-    private val vm: HomeViewModel by viewModel()
+    private val vm: DashboardViewModel by viewModel()
 
     private val data = listOf(
         HomeMenuItem(HomeMenuItem.COUNTRY_ID, "Страны", iconId = _drawable.ic_place_black_24dp),

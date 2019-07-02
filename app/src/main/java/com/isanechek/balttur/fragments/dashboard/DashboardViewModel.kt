@@ -1,10 +1,12 @@
-package com.isanechek.balttur.fragments.home
+package com.isanechek.balttur.fragments.dashboard
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.isanechek.balttur.BASE_URL
+import com.isanechek.balttur.DIGNITY_DATA
 import com.isanechek.balttur.data.NetworkClient
 import com.isanechek.balttur.data.PlatformContract
 import com.isanechek.balttur.data.database.dao.NewsDao
@@ -19,7 +21,7 @@ import com.isanechek.balttur.utils.Tracker
 import kotlinx.coroutines.*
 import java.util.concurrent.TimeUnit
 
-class HomeViewModel(
+class DashboardViewModel(
     private val client: NetworkClient,
     private val parser: HomePageParser,
     private val platform: PlatformContract,
@@ -31,6 +33,7 @@ class HomeViewModel(
     private val isTimeForUpdate = RequestLimiter(1, TimeUnit.DAYS, platform)
     private val _errorMessage: MutableLiveData<String> = MutableLiveData()
     private val _progressState: MutableLiveData<Boolean> = MutableLiveData()
+    private val _infoData: MutableLiveData<String> = MutableLiveData()
 
     private val toNewsEntity: (News) -> NewsEntity = { n ->
         NewsEntity(
@@ -72,7 +75,11 @@ class HomeViewModel(
     val toursData: LiveData<List<ToursInfoEntity>>
         get() = toursDao.load()
 
+    val infoData: LiveData<String>
+        get() = _infoData
+
     fun load(update: Boolean = false) = viewModelScope.launch {
+    	loadInfoData()
         withContext(Dispatchers.IO) {
             when {
                 update -> loadFromNetwork(true)
@@ -81,6 +88,19 @@ class HomeViewModel(
                 else -> Unit
             }
         }
+    }
+
+    fun loadInfoData() = viewModelScope.launch {
+    	withContext(Dispatchers.Default) {
+    		val texts = DIGNITY_DATA.split(".")
+            Log.e("Hyi", "texts size ${texts.size}")
+            for (text in texts) {
+//                delay(15*1000)
+                Log.e("Hyi", "text $texts")
+                _infoData.postValue(text)
+            }
+    	}
+    	
     }
 
     private suspend fun loadFromNetwork(update: Boolean) {
@@ -132,7 +152,7 @@ class HomeViewModel(
     }
 
     companion object {
-        private const val TAG = "HomeViewModel"
+        private const val TAG = "DashboardViewModel"
     }
 
 }
