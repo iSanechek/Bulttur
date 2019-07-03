@@ -106,7 +106,7 @@ class TouchableSpan(context: Context, private val link: Link) : TouchableBaseSpa
     companion object {
 
         private fun obtainStyledAttrsFromThemeAttr(context: Context, themeAttr: Int, styleAttrs: IntArray): TypedArray {
-            // Need to get resource id of style pointed to from the theme attr
+            // Need to get resource data of style pointed to from the theme attr
             val outValue = TypedValue()
             context.theme.resolveAttribute(themeAttr, outValue, true)
             val styleResId = outValue.resourceId

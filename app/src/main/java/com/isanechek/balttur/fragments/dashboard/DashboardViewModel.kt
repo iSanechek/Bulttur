@@ -1,10 +1,6 @@
 package com.isanechek.balttur.fragments.dashboard
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.isanechek.balttur.BASE_URL
 import com.isanechek.balttur.DIGNITY_DATA
 import com.isanechek.balttur.data.NetworkClient
@@ -33,7 +29,6 @@ class DashboardViewModel(
     private val isTimeForUpdate = RequestLimiter(1, TimeUnit.DAYS, platform)
     private val _errorMessage: MutableLiveData<String> = MutableLiveData()
     private val _progressState: MutableLiveData<Boolean> = MutableLiveData()
-    private val _infoData: MutableLiveData<String> = MutableLiveData()
 
     private val toNewsEntity: (News) -> NewsEntity = { n ->
         NewsEntity(
@@ -63,6 +58,8 @@ class DashboardViewModel(
         )
     }
 
+    val history: MutableList<String> = mutableListOf()
+
     val errorMessage:LiveData<String>
         get() = _errorMessage
 
@@ -75,11 +72,7 @@ class DashboardViewModel(
     val toursData: LiveData<List<ToursInfoEntity>>
         get() = toursDao.load()
 
-    val infoData: LiveData<String>
-        get() = _infoData
-
     fun load(update: Boolean = false) = viewModelScope.launch {
-    	loadInfoData()
         withContext(Dispatchers.IO) {
             when {
                 update -> loadFromNetwork(true)
@@ -90,17 +83,15 @@ class DashboardViewModel(
         }
     }
 
-    fun loadInfoData() = viewModelScope.launch {
-    	withContext(Dispatchers.Default) {
-    		val texts = DIGNITY_DATA.split(".")
-            Log.e("Hyi", "texts size ${texts.size}")
-            for (text in texts) {
-//                delay(15*1000)
-                Log.e("Hyi", "text $texts")
-                _infoData.postValue(text)
-            }
-    	}
-    	
+    fun loadInfoData(): LiveData<String> = liveData(context = viewModelScope.coroutineContext + Dispatchers.Default) {
+        do {
+            val data = DIGNITY_DATA.split(".")
+            val number = (0 until data.size).random()
+            delay(10*1000)
+            emit(data[number])
+            if (history.size >= 10) history.removeAt(0)
+            history.add(data[number])
+        } while (true)
     }
 
     private suspend fun loadFromNetwork(update: Boolean) {

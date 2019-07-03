@@ -1,38 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="136dp"
+    android:orientation="vertical">
 
-    <TextView android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_gravity="center"
-              android:gravity="center"
-              android:textColor="@color/textColor"
-              android:textStyle="bold|italic"
-              android:textSize="32sp"
-              android:text="БалтТур"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="БалтТур"
+        android:layout_marginTop="@dimen/dp16"
+        android:textColor="@color/textColor"
+        android:textSize="32sp"
+        android:textStyle="bold|italic" />
 
     <TextSwitcher
-            android:id="@+id/dashboard_info_item_switcher"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/dp2"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="@dimen/dp8"
-            android:visibility="invisible"
-            android:textSize="16sp"/>
-
-
-    <com.google.android.material.button.MaterialButton android:layout_width="match_parent"
-                                                       android:layout_height="wrap_content"
-                                                       android:layout_marginTop="@dimen/dp16"
-                                                       app:cornerRadius="@dimen/dp8"
-                                                       android:id="@+id/dashboard_info_item_filter"
-                                                       android:text="Подобрать тур"/>
+        android:id="@+id/dashboard_info_item_switcher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp2"
+        android:layout_marginEnd="@dimen/dp8"
+        android:layout_marginStart="@dimen/dp8"
+        android:layout_marginBottom="@dimen/dp8"
+        android:visibility="visible"
+        tools:visibility="gone" />
 
 
 </LinearLayout>

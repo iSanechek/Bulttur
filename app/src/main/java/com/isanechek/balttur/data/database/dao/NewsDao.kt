@@ -10,7 +10,7 @@ interface NewsDao {
     @Query("SELECT * FROM news")
     fun load(): LiveData<List<NewsEntity>>
 
-    @Query("SELECT * FROM news WHERE id =:id")
+    @Query("SELECT * FROM news WHERE data =:data")
     fun load(id: Int): LiveData<NewsEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
