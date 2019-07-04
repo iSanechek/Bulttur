@@ -10,7 +10,7 @@ interface ToursDao {
     @Query("SELECT * FROM tours_info")
     fun load(): LiveData<List<ToursInfoEntity>>
 
-    @Query("SELECT * FROM tours_info WHERE data =:data")
+    @Query("SELECT * FROM tours_info WHERE id =:id")
     fun load(id: Int): LiveData<ToursInfoEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

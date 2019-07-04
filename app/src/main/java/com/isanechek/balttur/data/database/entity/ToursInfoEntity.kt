@@ -3,7 +3,7 @@ package com.isanechek.balttur.data.database.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 
-@Entity(tableName = "tours_info", primaryKeys = ["data"])
+@Entity(tableName = "tours_info", primaryKeys = ["id"])
 data class ToursInfoEntity(val id: Int,
                            @ColumnInfo(name = "group_title") val groupTitle: String,
                            @ColumnInfo(name = "group_url") val groupUrl: String,

@@ -1,5 +1,6 @@
 package com.isanechek.balttur.fragments.dashboard.adapters
 
+import android.graphics.drawable.GradientDrawable
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -30,8 +31,11 @@ class DashboardMenuAdapter(
 
         fun bindTo(item: DashboardMenuItem, callback: (DashboardMenuItem) -> Unit) {
             dashboard_menu_item_container.onClick { callback(item) }
-            dashboard_menu_item_container.setBackgroundColor(item.color.toColorInt())
-            dashboard_menu_item_icon_bg.setBackgroundColor(item.secondColor.toColorInt())
+            dashboard_menu_item_container.setCardBackgroundColor(item.color.toColorInt())
+            val shape = GradientDrawable()
+            shape.shape = GradientDrawable.OVAL
+            shape.setColor(item.secondColor.toColorInt())
+            dashboard_menu_item_icon_bg.background = shape
             dashboard_menu_item_icon.setImageDrawable(ContextCompat.getDrawable(containerView.context, item.iconId))
             dashboard_menu_item_title.text = item.title
         }

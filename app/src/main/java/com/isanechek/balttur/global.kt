@@ -20,6 +20,7 @@ typealias _id = R.id
 typealias _drawable = R.drawable
 typealias _color = R.color
 typealias _anim = R.anim
+typealias _style = R.style
 
 infix fun ViewGroup.inflate(layoutResId: Int): View =
     LayoutInflater.from(context).inflate(layoutResId, this, false)

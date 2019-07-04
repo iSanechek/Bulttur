@@ -1,44 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="200dp"
-                                                   app:cardCornerRadius="@dimen/dp8">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_marginStart="@dimen/dp8"
+    android:layout_marginEnd="@dimen/dp8"
+    app:cardBackgroundColor="@color/test_color"
+    app:cardCornerRadius="@dimen/dp8">
 
-    <FrameLayout android:layout_width="match_parent"
-                 android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_gravity="center"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <FrameLayout android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:layout_gravity="center">
+            <FrameLayout
+                android:id="@+id/connect_item_call_container"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp16"
+                android:background="@drawable/company_call_bg">
 
-            <com.google.android.material.button.MaterialButton android:layout_width="wrap_content"
-                                                               android:layout_height="wrap_content"
-                                                               android:layout_gravity="start|bottom"
-                                                               android:layout_marginBottom="@dimen/dp8"
-                                                               android:layout_marginStart="@dimen/dp16"
-                                                               android:id="@+id/dashboard_company_item_mode_btn"
-                                                               android:text="Режим работы"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/phone_white" />
+            </FrameLayout>
 
-            <com.google.android.material.button.MaterialButton android:layout_width="wrap_content"
-                                                               android:layout_height="wrap_content"
-                                                               android:layout_gravity="center|bottom"
-                                                               android:layout_marginBottom="@dimen/dp8"
-                                                               android:id="@+id/dashboard_company_item_review_btn"
-                                                               android:text="Отзывы" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp4"
+                android:gravity="center"
+                android:text="Позвонить"
+                android:textColor="@color/textColor"
+                tools:ignore="HardcodedText" />
 
-            <com.google.android.material.button.MaterialButton android:layout_width="wrap_content"
-                                                               android:layout_height="wrap_content"
-                                                               android:layout_gravity="end|bottom"
-                                                               android:layout_marginBottom="@dimen/dp8"
-                                                               android:layout_marginEnd="@dimen/dp16"
-                                                               android:id="@+id/dashboard_company_item_about_btn"
-                                                               android:text="О нас"/>
+        </LinearLayout>
 
-        </FrameLayout>
-    </FrameLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/connect_item_map_container"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp16"
+                android:background="@drawable/company_work_time_bg">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/clock_white" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp4"
+                android:gravity="center"
+                android:textColor="@color/textColor"
+                android:text="Время работы"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/connect_item_work_time_container"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp16"
+                android:background="@drawable/company_home_bg">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/home_map" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp4"
+                android:gravity="center"
+                android:text="На карте"
+                android:textColor="@color/textColor"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+    </LinearLayout>
+
 </com.google.android.material.card.MaterialCardView>

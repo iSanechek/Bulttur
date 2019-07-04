@@ -8,4 +8,8 @@
     <color name="textDarkColor">#000000</color>
     <color name="textColorSecondary">#B3B1B1</color>
     <color name="defaultItemBackground">#0DFFFFFF</color>
+
+
+    <color name="test_color">#373C44</color>
+    <color name="test_color2">#20262D</color>
 </resources>

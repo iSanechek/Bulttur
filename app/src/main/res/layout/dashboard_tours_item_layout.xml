@@ -1,55 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/dashboard_tours_item_container"
-        app:cardCornerRadius="@dimen/dp8">
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dashboard_tours_item_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginEnd="1dp"
+    app:cardBackgroundColor="@color/test_color"
+    app:cardCornerRadius="@dimen/dp8">
 
     <LinearLayout
-            android:layout_width="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/dashboard_tours_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="@dimen/dp16"
+            android:layout_marginTop="@dimen/dp16"
+            android:layout_marginEnd="@dimen/dp16"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="3"
+            android:textColor="@color/textDarkColor"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="@tools:sample/full_names" />
+
+        <TextView
+            android:id="@+id/dashboard_tours_item_price"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="vertical">
-
-        <TextView
-                android:id="@+id/dashboard_tours_item_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/dp16"
-                android:layout_marginStart="@dimen/dp16"
-                android:layout_marginEnd="@dimen/dp16"
-                android:maxLines="3"
-                android:ellipsize="end"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/textDarkColor"
-                tools:text="@tools:sample/full_names"/>
-
-        <TextView
-                android:id="@+id/dashboard_tours_item_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="4dp"
-                android:textSize="16sp"
-                android:textStyle="normal"
-                android:textColor="@color/textColorSecondary"
-                tools:text="@tools:sample/full_names"/>
+            android:layout_marginTop="4dp"
+            android:textColor="@color/textColorSecondary"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            tools:text="@tools:sample/full_names" />
 
         <com.google.android.material.button.MaterialButton
-                android:id="@+id/dashboard_tours_item_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/dp8"
-                android:textSize="18sp"
-                android:text="Подробнее"
-                app:cornerRadius="@dimen/dp16"/>
+            android:id="@+id/dashboard_tours_item_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp8"
+            android:text="Подробнее"
+            android:textSize="18sp"
+            app:cornerRadius="@dimen/dp16" />
 
     </LinearLayout>
 
