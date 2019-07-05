@@ -5,7 +5,6 @@ import com.isanechek.balttur.di.appModule
 import com.isanechek.balttur.di.dataModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-import saschpe.android.customtabs.CustomTabsActivityLifecycleCallbacks
 
 class BaltturApplication : Application() {
 
@@ -17,7 +16,5 @@ class BaltturApplication : Application() {
             androidContext(this@BaltturApplication)
             modules(listOf(appModule, dataModule))
         }
-
-        registerActivityLifecycleCallbacks(CustomTabsActivityLifecycleCallbacks())
     }
 }

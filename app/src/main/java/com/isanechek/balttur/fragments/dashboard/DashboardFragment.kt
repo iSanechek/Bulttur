@@ -2,9 +2,12 @@ package com.isanechek.balttur.fragments.dashboard
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.listItems
+import com.isanechek.balttur._id
 import com.isanechek.balttur._layout
 import com.isanechek.balttur.data.models.DashboardMenuItem
 import com.isanechek.balttur.fragments.BaseFragment
@@ -28,11 +31,11 @@ class DashboardFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        val newsAdapter = DashboardNewsAdapter { item -> }
+        val newsAdapter = DashboardNewsAdapter { item -> openUrl("https://balttur.spb.ru${item.link}", item.title)}
         val menuAdapter =
-            DashboardMenuAdapter(DashboardMenuItem.items()) { item -> openUrl(item.data) }
+            DashboardMenuAdapter(DashboardMenuItem.items()) { item -> openUrl(item.data, item.title) }
         val toursAdapter =
-            DashboardToursAdapter { item -> openUrl("https://balttur.spb.ru${item.bigUrl}") }
+            DashboardToursAdapter { item -> openUrl(item.bigUrl, item.bigTitle) }
         val rootAdapter = DashboardAdapter(vm, newsAdapter, menuAdapter, toursAdapter) { callback ->
             when (callback.first) {
                 "info_long_click" -> MaterialDialog(requireContext()).show {
@@ -74,12 +77,14 @@ class DashboardFragment : BaseFragment() {
 //        }
     }
 
-    private fun openUrl(url: String) {
+    private fun openUrl(url: String, title: String) {
         dialogUtils.showWarningBrowserDialog(requireContext()) { isOpen ->
             if (isOpen) {
-                openTab(
-                    requireContext(),
-                    url
+                findNavController().navigate(
+                    _id.go_from_dashboard_to_web, bundleOf(
+                        Pair("args_url", url),
+                        Pair("args_title", title)
+                    )
                 )
             }
         }

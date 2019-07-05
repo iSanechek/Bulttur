@@ -1,60 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/main_navigation"
-            app:startDestination="@id/dashboard_screen">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/dashboard_screen">
 
-    <fragment android:id="@+id/home_screen"
-              android:name="com.isanechek.balttur.fragments.home.HomeFragment"
-              android:label="@string/title_home" >
+    <!--    <fragment android:id="@+id/home_screen"-->
+    <!--              android:name="com.isanechek.balttur.fragments.home.HomeFragment"-->
+    <!--              android:label="@string/title_home" >-->
 
-        <action android:id="@+id/go_from_home_to_license"
-                app:destination="@id/license_screen" />
+    <!--        <action android:id="@+id/go_from_home_to_license"-->
+    <!--                app:destination="@id/license_screen" />-->
 
-        <action android:id="@+id/go_from_home_to_info"
-                app:destination="@id/call_screen" />
+    <!--        <action android:id="@+id/go_from_home_to_info"-->
+    <!--                app:destination="@id/call_screen" />-->
 
-        <action android:id="@+id/go_from_home_to_country"
-                app:destination="@id/country_screen" />
+    <!--        <action android:id="@+id/go_from_home_to_country"-->
+    <!--                app:destination="@id/country_screen" />-->
 
-        <action android:id="@+id/go_from_home_to_dev"
-                app:destination="@id/dev_info_screen" />
+    <!--        <action android:id="@+id/go_from_home_to_dev"-->
+    <!--                app:destination="@id/dev_info_screen" />-->
 
-        <action android:id="@+id/go_from_home_to_search"
-                app:destination="@id/dev_info_screen"
-                app:enterAnim="@anim/slide_in_down"
-                app:exitAnim="@anim/exit_from_right"
-                app:popEnterAnim="@anim/slide_in_down"
-                app:popExitAnim="@anim/exit_from_right" />
+    <!--        <action android:id="@+id/go_from_home_to_search"-->
+    <!--                app:destination="@id/dev_info_screen"-->
+    <!--                app:enterAnim="@anim/slide_in_down"-->
+    <!--                app:exitAnim="@anim/exit_from_right"-->
+    <!--                app:popEnterAnim="@anim/slide_in_down"-->
+    <!--                app:popExitAnim="@anim/exit_from_right" />-->
 
+    <!--    </fragment>-->
+
+    <fragment
+        android:id="@+id/license_screen"
+        android:name="com.isanechek.balttur.fragments.license.LicenseFragment"
+        android:label="License" />
+
+    <fragment
+        android:id="@+id/call_screen"
+        android:name="com.isanechek.balttur.fragments.info.InfoFragment"
+        android:label="Call" />
+
+    <fragment
+        android:id="@+id/country_screen"
+        android:name="com.isanechek.balttur.fragments.country.CountryFragment"
+        android:label="Country" />
+
+    <fragment
+        android:id="@+id/dev_info_screen"
+        android:name="com.isanechek.balttur.fragments.appinfo.DeveloperInfoFragment"
+        android:label="DevInfo" />
+
+    <fragment
+        android:id="@+id/dev_info_search"
+        android:name="com.isanechek.balttur.fragments.search.SearchFragment"
+        android:label="Search" />
+
+    <fragment
+        android:id="@+id/dev_info_debug"
+        android:name="com.isanechek.balttur.debug.DebugFragment"
+        android:label="Search" />
+
+    <fragment
+        android:id="@+id/dashboard_screen"
+        android:name="com.isanechek.balttur.fragments.dashboard.DashboardFragment"
+        android:label="Dashboard" >
+        <action android:id="@+id/go_from_dashboard_to_web" app:destination="@id/web_fragment" />
     </fragment>
 
-    <fragment android:id="@+id/license_screen"
-              android:name="com.isanechek.balttur.fragments.license.LicenseFragment"
-              android:label="License"/>
-
-    <fragment android:id="@+id/call_screen"
-              android:name="com.isanechek.balttur.fragments.info.InfoFragment"
-              android:label="Call"/>
-
-    <fragment android:id="@+id/country_screen"
-              android:name="com.isanechek.balttur.fragments.country.CountryFragment"
-              android:label="Country"/>
-
-    <fragment android:id="@+id/dev_info_screen"
-              android:name="com.isanechek.balttur.fragments.appinfo.DeveloperInfoFragment"
-              android:label="DevInfo"/>
-
-    <fragment android:id="@+id/dev_info_search"
-              android:name="com.isanechek.balttur.fragments.search.SearchFragment"
-              android:label="Search"/>
-
-    <fragment android:id="@+id/dev_info_debug"
-              android:name="com.isanechek.balttur.debug.DebugFragment"
-              android:label="Search"/>
-
-    <fragment android:id="@+id/dashboard_screen"
-              android:name="com.isanechek.balttur.fragments.dashboard.DashboardFragment"
-              android:label="Dashboard"/>
+    <fragment
+        android:id="@+id/web_fragment"
+        android:name="com.isanechek.balttur.fragments.web.WebFragment"
+        android:label="Web"
+        tools:layout="@layout/web_fragment_layout" />
 
 </navigation>
