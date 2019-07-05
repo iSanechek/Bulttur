@@ -33,10 +33,9 @@ class DashboardFragment : BaseFragment() {
 
         val newsAdapter = DashboardNewsAdapter { item -> openUrl("https://balttur.spb.ru${item.link}", item.title)}
         val menuAdapter = DashboardMenuAdapter(DashboardMenuItem.items()) { item ->
-            if (item.data.contains("dev")) {
-
-            } else {
-                openUrl(item.data, item.title)
+            when {
+                item.data.contains("dev") -> findNavController().navigate(_id.go_from_dashboard_to_dev_info)
+                else -> openUrl(item.data, item.title)
             }
         }
         val toursAdapter = DashboardToursAdapter { item -> openUrl(item.bigUrl, item.bigTitle) }
@@ -75,7 +74,7 @@ class DashboardFragment : BaseFragment() {
                 "info_title_short_click" -> openUrl("https://balttur.spb.ru/about-company/about-us/", "О нас")
                 "comments_short_click" -> openUrl("https://balttur.spb.ru/about-company/reviews/", "Отзывы")
                 "company_map_short_click" -> Unit
-                "company_call_short_click" -> Unit
+                "company_call_short_click" -> findNavController().navigate(_id.go_from_dashboard_to_connect)
             }
         }
 

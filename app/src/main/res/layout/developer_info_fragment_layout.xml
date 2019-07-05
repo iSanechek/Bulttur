@@ -1,68 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="horizontal"
-                  android:layout_marginStart="@dimen/dp16"
-                  android:layout_marginTop="@dimen/dp16">
-        <ImageButton
-                android:id="@+id/app_info_close_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:padding="@dimen/dp8"
-                android:background="?attr/selectableItemBackground"
-                app:srcCompat="@drawable/ic_close_black_24dp"/>
+    <include
+        layout="@layout/custom_toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize" />
 
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_gravity="center_vertical"
-                  android:layout_marginStart="@dimen/dp8"
-                  android:textColor="@color/textColor"
-                  android:text="О разработчике"/>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_gravity="center_horizontal"
-              android:layout_marginTop="24dp"
-              android:layout_marginEnd="48dp"
-              android:textStyle="bold"
-              android:textColor="@color/textColor"
-              android:textSize="42sp"
-              android:text="AverdSoft"/>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
 
-
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:orientation="vertical"
-                  android:layout_marginTop="124dp"
-                  android:background="#f5f5f5">
-
-        <FrameLayout android:layout_width="match_parent"
-                     android:layout_height="wrap_content">
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="match_parent"
-                      android:layout_gravity="center|start"
-                      android:layout_marginStart="24dp"
-                      android:text="Написать нам на e-mail"/>
-            <com.google.android.material.button.MaterialButton
-                    android:id="@+id/app_info_send_email"
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end|center"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/dp16"
+                    android:layout_marginBottom="@dimen/dp16"
+                    android:text="Averd Soft"
+                    android:textColor="@color/textColor"
+                    android:textSize="42sp"
+                    android:textStyle="bold|italic"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/dp16"
+                    android:layout_marginTop="@dimen/dp16"
+                    android:text="Сакт-Петербург"
+                    android:textColor="@color/textColorSecondary"
+                    android:textSize="18sp"
+                    android:textStyle="normal"
+                    tools:ignore="HardcodedText" />
+            </FrameLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
+                    android:text="Написать нам"
+                    android:textColor="@color/textColor"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="@dimen/dp16"
+                    android:layout_marginTop="@dimen/dp8"
                     android:layout_marginEnd="@dimen/dp16"
-                    android:text="написать"
-                    app:cornerRadius="@dimen/dp8"
-                    app:strokeWidth="1dp"
-                    app:strokeColor="@color/colorAccent"/>
-        </FrameLayout>
-    </LinearLayout>
+                    app:cardBackgroundColor="@color/card_bg_color"
+                    app:cardElevation="@dimen/dp16">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center|start"
+                            android:layout_marginStart="@dimen/dp16"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp4"
+                                android:padding="@dimen/dp8"
+                                app:srcCompat="@drawable/email_white" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/dp4"
+                                android:gravity="center"
+                                android:padding="@dimen/dp6"
+                                android:text="e-mail"
+                                android:textColor="@color/textColor"
+                                android:textSize="22sp"
+                                tools:ignore="HardcodedText" />
+                        </LinearLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/dev_write_email_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center|end"
+                            android:layout_marginEnd="@dimen/dp16"
+                            android:background="@color/card_bg_color"
+                            android:text="Написать"
+                            android:textSize="18sp"
+                            app:cornerRadius="@dimen/dp2"
+                            app:strokeColor="@color/colorAccent"
+                            app:strokeWidth="1dp"
+                            tools:ignore="HardcodedText" />
+                    </FrameLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp16"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
+                    android:text="Соц. сети"
+                    android:textColor="@color/textColor"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginStart="@dimen/dp16"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:layout_marginEnd="@dimen/dp16"
+                    app:cardBackgroundColor="@color/card_bg_color"
+                    app:cardCornerRadius="@dimen/dp8">
+
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp8"
+                android:layout_marginBottom="22dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
+                    android:text="Веб сайт"
+                    android:textColor="@color/textColor"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="@dimen/dp16"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:layout_marginEnd="@dimen/dp16"
+                    app:cardBackgroundColor="@color/card_bg_color"
+                    app:cardCornerRadius="@dimen/dp8">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:layout_gravity="center_vertical"
+                            app:srcCompat="@drawable/eart_white" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/dev_go_web_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp8"
+                            android:background="@color/card_bg_color"
+                            android:text="Посетить"
+                            android:textSize="18sp"
+                            app:cornerRadius="@dimen/dp2"
+                            app:strokeColor="@color/colorAccent"
+                            app:strokeWidth="1dp"
+                            tools:ignore="HardcodedText" />
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

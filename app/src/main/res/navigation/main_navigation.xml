@@ -63,8 +63,16 @@
     <fragment
         android:id="@+id/dashboard_screen"
         android:name="com.isanechek.balttur.fragments.dashboard.DashboardFragment"
-        android:label="Dashboard" >
-        <action android:id="@+id/go_from_dashboard_to_web" app:destination="@id/web_fragment" />
+        android:label="Dashboard">
+        <action
+            android:id="@+id/go_from_dashboard_to_web"
+            app:destination="@id/web_fragment" />
+        <action
+            android:id="@+id/go_from_dashboard_to_dev_info"
+            app:destination="@id/dev_info_screen" />
+        <action
+            android:id="@+id/go_from_dashboard_to_connect"
+            app:destination="@id/connect_screen" />
     </fragment>
 
     <fragment
@@ -72,5 +80,10 @@
         android:name="com.isanechek.balttur.fragments.web.WebFragment"
         android:label="Web"
         tools:layout="@layout/web_fragment_layout" />
+
+    <fragment
+        android:id="@+id/connect_screen"
+        android:name="com.isanechek.balttur.fragments.connect.ConnectFragment"
+        android:label="@string/app_name" />
 
 </navigation>
