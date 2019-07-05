@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.toColorInt
 import androidx.recyclerview.widget.RecyclerView
+import com.astritveliu.boom.Boom
 import com.isanechek.balttur._layout
 import com.isanechek.balttur.data.models.DashboardMenuItem
 import com.isanechek.balttur.inflate
@@ -30,7 +31,10 @@ class DashboardMenuAdapter(
     inner class DashboardMenuVH(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         fun bindTo(item: DashboardMenuItem, callback: (DashboardMenuItem) -> Unit) {
-            dashboard_menu_item_container.onClick { callback(item) }
+            dashboard_menu_item_container.apply {
+                onClick { callback(item) }
+                Boom(this)
+            }
             dashboard_menu_item_container.setCardBackgroundColor(item.color.toColorInt())
             val shape = GradientDrawable()
             shape.shape = GradientDrawable.OVAL

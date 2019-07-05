@@ -24,7 +24,7 @@ class DashboardToursAdapter(private val callback: (ToursInfoEntity) -> Unit) : R
     }
 
     fun submit(data: List<ToursInfoEntity>) {
-        items.addAll(data)
+        items.addAll(data.shuffled())
         notifyDataSetChanged()
     }
 

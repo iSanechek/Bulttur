@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="100dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -9,7 +10,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="@dimen/dp8"
+        android:padding="@dimen/dp4"
         android:orientation="horizontal"
+        android:background="@drawable/filter_bg"
         android:id="@+id/filter_tours_container">
 
         <TextView
@@ -19,14 +22,18 @@
             android:textSize="20sp"
             android:padding="@dimen/dp8"
             android:textColor="@color/textColor"
-            android:text="Подобрать тур"/>
+            android:text="Подобрать тур"
+            tools:ignore="HardcodedText" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:tint="@color/colorAccent"
+            android:layout_marginTop="@dimen/dp2"
             android:padding="@dimen/dp8"
+            android:layout_margin="@dimen/dp4"
+            android:background="@drawable/filter_btn_bg"
             android:src="@drawable/ic_chevron_right_black_24dp"/>
 
 

@@ -44,10 +44,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
+        android:backgroundTint="#2AB16A"
         android:layout_margin="@dimen/dp16"
-        android:elevation="@dimen/dp8"
-        android:visibility="gone"
-        app:layout_behavior="com.isanechek.balttur.utils.ScrollFABBehavior"
-        app:srcCompat="@drawable/ic_local_phone_white_24dp" />
+        android:elevation="@dimen/dp16"
+        android:tint="@color/textColor"
+        android:clickable="true"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/ic_forum_white_24dp"
+        android:focusable="true" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

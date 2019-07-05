@@ -15,8 +15,8 @@ data class DashboardMenuItem(
             DashboardMenuItem(
                 data = "https://balttur.spb.ru/tourists/news/",
                 title = "Новости",
-                color = "#0091EA",
-                secondColor = "#80D8FF",
+                color = "#7E57C2",
+                secondColor = "#B39DDB",
                 iconId = _drawable.news_white
             ),
             DashboardMenuItem(

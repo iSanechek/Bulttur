@@ -1,5 +1,6 @@
 package com.isanechek.balttur.fragments.dashboard.adapters
 
+import android.annotation.SuppressLint
 import android.view.ContextThemeWrapper
 import android.view.View
 import android.view.ViewGroup
@@ -11,16 +12,19 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.astritveliu.boom.Boom
 import com.isanechek.balttur.*
 import com.isanechek.balttur.fragments.LifecycleViewHolder
 import com.isanechek.balttur.fragments.dashboard.DashboardViewModel
 import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.comments_item_layout_container.*
 import kotlinx.android.synthetic.main.dashboard_company_item_layout_container.*
 import kotlinx.android.synthetic.main.dashboard_filter_tours_layout_container.*
 import kotlinx.android.synthetic.main.dashboard_info_layout_container.*
 import kotlinx.android.synthetic.main.dashboard_menu_layout_container.*
 import kotlinx.android.synthetic.main.dashboard_news_layout_container.*
 import kotlinx.android.synthetic.main.dashboard_tours_item_layout_container.*
+import kotlinx.android.synthetic.main.empty_layout_container.*
 
 class DashboardAdapter(
     private val vm: DashboardViewModel,
@@ -31,7 +35,7 @@ class DashboardAdapter(
 ) :
     RecyclerView.Adapter<LifecycleViewHolder>() {
 
-    private val items = listOf("news", "menu", "info", "tours", "filter", "company_info")
+    private val items = listOf("news", "menu", "info", "tours", "filter", "company_info", "comments", "empty")
 
     override fun onViewAttachedToWindow(holder: LifecycleViewHolder) {
         super.onViewAttachedToWindow(holder)
@@ -51,6 +55,8 @@ class DashboardAdapter(
             TOURS_TYPE -> ToursHolder(parent.inflate(_layout.dashboard_tours_item_layout_container))
             FILTER_TYPE -> FilterHolder(parent.inflate(_layout.dashboard_filter_tours_layout_container))
             COMPANY_INFO_TYPE -> CompanyInfoHolder(parent.inflate(_layout.dashboard_company_item_layout_container))
+            EMPTY_TYPE -> EmptyHolder(parent.inflate(_layout.empty_layout_container))
+            COMMENTS_TYPE -> CommentsHolder(parent.inflate(_layout.comments_item_layout_container))
             else -> EmptyHolder(FrameLayout(parent.context))
         }
 
@@ -64,17 +70,32 @@ class DashboardAdapter(
             is ToursHolder -> holder.bindTo(vm, toursAdapter)
             is FilterHolder -> holder.bindTo(callback)
             is CompanyInfoHolder -> holder.bindTo(callback)
+            is EmptyHolder -> holder.bindTo(callback)
+            is CommentsHolder -> holder.bindTo(callback)
         }
     }
 
-    override fun getItemViewType(position: Int): Int = when(items[position]) {
+    override fun getItemViewType(position: Int): Int = when (items[position]) {
         "news" -> NEWS_TYPE
         "menu" -> MENU_TYPE
         "info" -> INFO_TYPE
         "tours" -> TOURS_TYPE
         "filter" -> FILTER_TYPE
         "company_info" -> COMPANY_INFO_TYPE
+        "empty" -> EMPTY_TYPE
+        "comments" -> COMMENTS_TYPE
         else -> EMPTY_TYPE
+    }
+
+    inner class CommentsHolder(override val containerView: View) :
+        LifecycleViewHolder(containerView),
+        LayoutContainer {
+        fun bindTo(callback: (Pair<String, Any>) -> Unit) {
+            comments_item_container.apply {
+                Boom(this)
+                onClick { callback(Pair("comments_short_click", "")) }
+            }
+        }
     }
 
     inner class CompanyInfoHolder(override val containerView: View) :
@@ -82,8 +103,18 @@ class DashboardAdapter(
         LayoutContainer {
         fun bindTo(callback: (Pair<String, Any>) -> Unit) {
             connect_item_call_container.onClick { callback(Pair("", "")) }
+            Boom(connect_item_call_container)
             connect_item_map_container.onClick { callback(Pair("", "")) }
-            connect_item_work_time_container.onClick { callback(Pair("company_info_short_click", "")) }
+            Boom(connect_item_map_container)
+            connect_item_work_time_container.onClick {
+                callback(
+                    Pair(
+                        "company_info_short_click",
+                        ""
+                    )
+                )
+            }
+            Boom(connect_item_work_time_container)
         }
     }
 
@@ -95,6 +126,7 @@ class DashboardAdapter(
                 adapter = toursAdapter
                 orientation = ViewPager2.ORIENTATION_HORIZONTAL
             }
+            dashboard_tours_item_dots.setViewPager(dashboard_tours_item_pager)
             vm.toursData.observe(this, Observer { data ->
                 if (data != null) {
                     toursAdapter.submit(data)
@@ -107,7 +139,10 @@ class DashboardAdapter(
         LifecycleViewHolder(containerView),
         LayoutContainer {
         fun bindTo(callback: (Pair<String, Any>) -> Unit) {
-            filter_tours_container.onClick { callback(Pair("filter_short_click", "empty")) }
+            Boom(filter_tours_container)
+            filter_tours_container.onClick {
+                callback(Pair("filter_short_click", "empty"))
+            }
         }
     }
 
@@ -136,12 +171,17 @@ class DashboardAdapter(
                     callback(Pair("info_long_click", "empty"))
                     true
                 }
+                Boom(this)
             }
             vm.loadInfoData().observe(this, Observer { text ->
                 if (text != null) {
                     dashboard_info_item_switcher.setText(text)
                 }
             })
+            dashboard_info_item_title.apply {
+                Boom(this)
+                onClick { callback(Pair("info_title_short_click", "")) }
+            }
         }
     }
 
@@ -150,7 +190,8 @@ class DashboardAdapter(
         LayoutContainer {
         fun bindTo(menuAdapter: DashboardMenuAdapter) {
             dashboard_menu_items.apply {
-                layoutManager = LinearLayoutManager(containerView.context, RecyclerView.HORIZONTAL, false)
+                layoutManager =
+                    LinearLayoutManager(containerView.context, RecyclerView.HORIZONTAL, false)
                 adapter = menuAdapter
                 setHasFixedSize(true)
             }
@@ -166,7 +207,7 @@ class DashboardAdapter(
                 orientation = ViewPager2.ORIENTATION_HORIZONTAL
             }
             dashboard_news_item_dots.setViewPager(dashboard_news_pager)
-            vm.newsData.observe(this, Observer {data ->
+            vm.newsData.observe(this, Observer { data ->
                 if (data != null) newsAdapter.submit(data)
             })
         }
@@ -174,7 +215,17 @@ class DashboardAdapter(
 
     inner class EmptyHolder(override val containerView: View) :
         LifecycleViewHolder(containerView),
-        LayoutContainer
+        LayoutContainer {
+        @SuppressLint("SetTextI18n")
+        fun bindTo(callback: (Pair<String, Any>) -> Unit) {
+            Boom(awerd_app_version_container)
+            awerd_app_version_container.apply {
+                Boom(this)
+                onClick { callback(Pair("dev_info_short_click", "empty")) }
+            }
+            awerd_app_version_tv.text = "v:${BuildConfig.VERSION_CODE}"
+        }
+    }
 
     companion object {
         private const val EMPTY_TYPE = 0
@@ -184,5 +235,6 @@ class DashboardAdapter(
         private const val TOURS_TYPE = 4
         private const val FILTER_TYPE = 5
         private const val COMPANY_INFO_TYPE = 6
+        private const val COMMENTS_TYPE = 7
     }
 }

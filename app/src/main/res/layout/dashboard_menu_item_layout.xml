@@ -8,6 +8,7 @@
     android:layout_marginStart="@dimen/dp2"
     android:layout_marginEnd="@dimen/dp2"
     android:id="@+id/dashboard_menu_item_container"
+    app:cardElevation="@dimen/dp8"
     app:cardCornerRadius="@dimen/dp16">
 
     <LinearLayout
