@@ -22,7 +22,7 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
+                android:layout_height="110dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -67,7 +67,7 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="80dp"
                     android:layout_marginStart="@dimen/dp16"
                     android:layout_marginTop="@dimen/dp8"
                     android:layout_marginEnd="@dimen/dp16"
@@ -82,7 +82,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center|start"
-                            android:layout_marginStart="@dimen/dp16"
+                            android:layout_marginStart="@dimen/dp24"
                             android:orientation="horizontal">
 
                             <ImageView
@@ -101,23 +101,10 @@
                                 android:padding="@dimen/dp6"
                                 android:text="e-mail"
                                 android:textColor="@color/textColor"
-                                android:textSize="22sp"
+                                android:textSize="24sp"
                                 tools:ignore="HardcodedText" />
                         </LinearLayout>
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/dev_write_email_btn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center|end"
-                            android:layout_marginEnd="@dimen/dp16"
-                            android:background="@color/card_bg_color"
-                            android:text="Написать"
-                            android:textSize="18sp"
-                            app:cornerRadius="@dimen/dp2"
-                            app:strokeColor="@color/colorAccent"
-                            app:strokeWidth="1dp"
-                            tools:ignore="HardcodedText" />
                     </FrameLayout>
 
                 </com.google.android.material.card.MaterialCardView>
@@ -141,12 +128,170 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="180dp"
                     android:layout_marginStart="@dimen/dp16"
                     android:layout_marginTop="@dimen/dp8"
                     android:layout_marginEnd="@dimen/dp16"
                     app:cardBackgroundColor="@color/card_bg_color"
                     app:cardCornerRadius="@dimen/dp8">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:id="@+id/dev_vk_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginTop="24dp"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                app:srcCompat="@drawable/vk_icon_white" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="Вконтакте"
+                                android:textColor="@color/textColor"
+                                tools:ignore="HardcodedText" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/dev_ok_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="24dp"
+                            android:orientation="vertical"
+                            app:layout_constraintEnd_toStartOf="@id/dev_insta_btn"
+                            app:layout_constraintStart_toEndOf="@+id/dev_vk_btn"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                app:srcCompat="@drawable/ic_ok_1" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="Одноклассники"
+                                android:textColor="@color/textColor"
+                                tools:ignore="HardcodedText" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/dev_insta_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginEnd="24dp"
+                            android:orientation="vertical"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                app:srcCompat="@drawable/ic_instagram" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="Instagram"
+                                android:textColor="@color/textColor"
+                                tools:ignore="HardcodedText" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/dev_telegram_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="28dp"
+                            android:layout_marginBottom="24dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                app:srcCompat="@drawable/ic_telegram" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="Telegram"
+                                android:textColor="@color/textColor"
+                                tools:ignore="HardcodedText" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/dev_twitter_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="34dp"
+                            android:layout_marginBottom="24dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                app:srcCompat="@drawable/twitter_icon_white" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="Twitter"
+                                android:textColor="@color/textColor"
+                                tools:ignore="HardcodedText" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/dev_facebook_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="4dp"
+                            android:layout_marginBottom="24dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/dev_twitter_btn"
+                            app:layout_constraintStart_toEndOf="@+id/dev_telegram_btn">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                app:srcCompat="@drawable/facebook_icon_white" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="Facebook"
+                                android:textColor="@color/textColor"
+                                tools:ignore="HardcodedText" />
+                        </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
@@ -170,7 +315,7 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="80dp"
                     android:layout_marginStart="@dimen/dp16"
                     android:layout_marginTop="@dimen/dp8"
                     android:layout_marginEnd="@dimen/dp16"
@@ -180,25 +325,27 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_gravity="center">
+                        android:layout_gravity="center|start"
+                        android:layout_marginStart="@dimen/dp24"
+                        android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
-                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="@dimen/dp4"
+                            android:padding="@dimen/dp8"
                             app:srcCompat="@drawable/eart_white" />
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/dev_go_web_btn"
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/dp8"
-                            android:background="@color/card_bg_color"
-                            android:text="Посетить"
-                            android:textSize="18sp"
-                            app:cornerRadius="@dimen/dp2"
-                            app:strokeColor="@color/colorAccent"
-                            app:strokeWidth="1dp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/dp4"
+                            android:gravity="center"
+                            android:padding="@dimen/dp6"
+                            android:text="Посетить сайт"
+                            android:textColor="@color/textColor"
+                            android:textSize="24sp"
                             tools:ignore="HardcodedText" />
                     </LinearLayout>
 
