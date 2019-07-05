@@ -57,7 +57,7 @@
             android:orientation="vertical">
 
             <FrameLayout
-                android:id="@+id/connect_item_map_container"
+                android:id="@+id/connect_item_work_time_container"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
@@ -91,7 +91,7 @@
             android:orientation="vertical">
 
             <FrameLayout
-                android:id="@+id/connect_item_work_time_container"
+                android:id="@+id/connect_item_map_container"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"

@@ -32,10 +32,14 @@ class DashboardFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         val newsAdapter = DashboardNewsAdapter { item -> openUrl("https://balttur.spb.ru${item.link}", item.title)}
-        val menuAdapter =
-            DashboardMenuAdapter(DashboardMenuItem.items()) { item -> openUrl(item.data, item.title) }
-        val toursAdapter =
-            DashboardToursAdapter { item -> openUrl(item.bigUrl, item.bigTitle) }
+        val menuAdapter = DashboardMenuAdapter(DashboardMenuItem.items()) { item ->
+            if (item.data.contains("dev")) {
+
+            } else {
+                openUrl(item.data, item.title)
+            }
+        }
+        val toursAdapter = DashboardToursAdapter { item -> openUrl(item.bigUrl, item.bigTitle) }
         val rootAdapter = DashboardAdapter(vm, newsAdapter, menuAdapter, toursAdapter) { callback ->
             when (callback.first) {
                 "info_long_click" -> MaterialDialog(requireContext()).show {
@@ -54,7 +58,7 @@ class DashboardFragment : BaseFragment() {
                     }
                 }
                 "filter_short_click" -> openUrl("https://balttur.spb.ru/filter/", "Найти тур")
-                "company_info_short_click" -> MaterialDialog(requireContext())
+                "company_work_time_short_click" -> MaterialDialog(requireContext())
                     .show {
                         lifecycleOwner(this@DashboardFragment)
                         title(text = "Режим работы")
@@ -70,6 +74,8 @@ class DashboardFragment : BaseFragment() {
                 "dev_info_short_click" -> openUrl(DEV_WEB_SITE, "AwerdSoft")
                 "info_title_short_click" -> openUrl("https://balttur.spb.ru/about-company/about-us/", "О нас")
                 "comments_short_click" -> openUrl("https://balttur.spb.ru/about-company/reviews/", "Отзывы")
+                "company_map_short_click" -> Unit
+                "company_call_short_click" -> Unit
             }
         }
 

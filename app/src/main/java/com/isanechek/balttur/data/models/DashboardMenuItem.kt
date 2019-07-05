@@ -27,6 +27,13 @@ data class DashboardMenuItem(
                 iconId = _drawable.eart_white
             ),
             DashboardMenuItem(
+                data = "https://balttur.spb.ru/search/",
+                title = "Поиск",
+                color = "#FF6E40",
+                secondColor = "#FF9E80",
+                iconId = _drawable.ic_search_black_24dp
+            ),
+            DashboardMenuItem(
                 data = "https://balttur.spb.ru/visas/",
                 title = "Визы",
                 color = "#FF9100",
@@ -46,6 +53,13 @@ data class DashboardMenuItem(
                 color = "#F57F17",
                 secondColor = "#F9A825",
                 iconId = _drawable.agencies_white
+            ),
+            DashboardMenuItem(
+                data = "dev",
+                title = "Разработчики",
+                color = "#2E7D32",
+                secondColor = "#58975B",
+                iconId = _drawable.dev_white
             )
         )
     }

@@ -102,19 +102,18 @@ class DashboardAdapter(
         LifecycleViewHolder(containerView),
         LayoutContainer {
         fun bindTo(callback: (Pair<String, Any>) -> Unit) {
-            connect_item_call_container.onClick { callback(Pair("", "")) }
-            Boom(connect_item_call_container)
-            connect_item_map_container.onClick { callback(Pair("", "")) }
-            Boom(connect_item_map_container)
-            connect_item_work_time_container.onClick {
-                callback(
-                    Pair(
-                        "company_info_short_click",
-                        ""
-                    )
-                )
+            connect_item_call_container.apply {
+                onClick { callback(Pair("company_call_short_click", "")) }
+                Boom(this)
             }
-            Boom(connect_item_work_time_container)
+            connect_item_map_container.apply {
+                onClick { callback(Pair("company_map_short_click", "")) }
+                Boom(this)
+            }
+            connect_item_work_time_container.apply {
+                onClick { callback(Pair("company_work_time_short_click", "")) }
+                Boom(this)
+            }
         }
     }
 
@@ -223,7 +222,7 @@ class DashboardAdapter(
                 Boom(this)
                 onClick { callback(Pair("dev_info_short_click", "empty")) }
             }
-            awerd_app_version_tv.text = "v:${BuildConfig.VERSION_CODE}"
+            awerd_app_version_tv.text = "v:${BuildConfig.VERSION_NAME}"
         }
     }
 

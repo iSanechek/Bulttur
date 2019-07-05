@@ -47,7 +47,6 @@
         android:backgroundTint="#2AB16A"
         android:layout_margin="@dimen/dp16"
         android:elevation="@dimen/dp16"
-        android:tint="@color/textColor"
         android:clickable="true"
         app:fabSize="normal"
         app:srcCompat="@drawable/ic_forum_white_24dp"
