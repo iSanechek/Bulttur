@@ -7,9 +7,24 @@ import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 
 interface DialogUtils {
     fun showWarningBrowserDialog(context: Context, lifecycleOwner: LifecycleOwner, callback: (Boolean) -> Unit)
+    fun showWarningLongDialog(context: Context, lifecycleOwner: LifecycleOwner, callback: (Boolean) -> Unit)
 }
 
 class DialogUtilsImpl(private val pref: PrefUtils) : DialogUtils {
+    override fun showWarningLongDialog(
+        context: Context,
+        lifecycleOwner: LifecycleOwner,
+        callback: (Boolean) -> Unit
+    ) {
+        MaterialDialog(context).show {
+            title(text = "Предупреждение")
+            message(text = "Для копирования данных просто удерживайте элемент")
+            positiveButton(text = "ok") {
+                callback(true)
+                it.dismiss()
+            }
+        }
+    }
 
     override fun showWarningBrowserDialog(context: Context, lifecycleOwner: LifecycleOwner, callback: (Boolean) -> Unit) {
         when {

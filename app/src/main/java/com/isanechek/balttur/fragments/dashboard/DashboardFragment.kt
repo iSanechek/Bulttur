@@ -5,7 +5,9 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import com.afollestad.materialdialogs.list.listItems
 import com.isanechek.balttur.*
@@ -41,7 +43,7 @@ class DashboardFragment : BaseFragment() {
         val toursAdapter = DashboardToursAdapter { item -> openUrl(item.bigUrl, item.bigTitle) }
         val rootAdapter = DashboardAdapter(vm, newsAdapter, menuAdapter, toursAdapter) { callback ->
             when (callback.first) {
-                "info_long_click" -> MaterialDialog(requireContext()).show {
+                "info_long_click" -> MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
                     lifecycleOwner(this@DashboardFragment)
                     title(text = "История показов")
                     listItems(items = vm.history.reversed())
@@ -73,8 +75,12 @@ class DashboardFragment : BaseFragment() {
                 "dev_info_short_click" -> openUrl(DEV_WEB_SITE, "AwerdSoft")
                 "info_title_short_click" -> openUrl("https://balttur.spb.ru/about-company/about-us/", "О нас")
                 "comments_short_click" -> openUrl("https://balttur.spb.ru/about-company/reviews/", "Отзывы")
-                "company_map_short_click" -> Unit
+                "company_map_short_click" -> handleAction(MAPS_LIN, "Переход в карты")
                 "company_call_short_click" -> findNavController().navigate(_id.go_from_dashboard_to_connect)
+                "open_vk" -> handleAction(callback.second as String, "Переход в вк")
+                "copy_vk" -> copyDataAction(callback.second as String, CLICK_EVENT, "Скопирована вк ссылка")
+                "email_open" -> handleAction(callback.second as String,"Открыт e-mail")
+                "email_copy"  -> copyDataAction(callback.second as String, CLICK_EVENT, "Скопирована e-mail")
             }
         }
 
@@ -88,8 +94,20 @@ class DashboardFragment : BaseFragment() {
         }
     }
 
+    private fun handleAction(data: String, msg: String) {
+        if (prefUtils.isLongShowWarning) {
+            dialogUtils.showWarningLongDialog(requireContext(), this) {isOk ->
+                if (isOk) {
+                    prefUtils.isLongShowWarning = false
+                    startAction(data, CLICK_EVENT, msg)
+                }
+            }
+        } else startAction(data, CLICK_EVENT, msg)
+    }
+
     private fun openUrl(url: String, title: String) {
         dialogUtils.showWarningBrowserDialog(requireContext(), this) { isOpen ->
+            clickEvent("Открыто $title")
             if (isOpen) {
                 findNavController().navigate(
                     _id.go_from_dashboard_to_web, bundleOf(

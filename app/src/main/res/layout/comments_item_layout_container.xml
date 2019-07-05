@@ -6,41 +6,47 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginStart="@dimen/dp8"
     android:layout_marginEnd="@dimen/dp8"
-    app:cardBackgroundColor="@color/card_bg_color"
-    app:cardCornerRadius="@dimen/dp8">
+    android:layout_marginTop="@dimen/dp1"
+    app:cardBackgroundColor="@color/colorAccent"
+    app:cardCornerRadius="@dimen/dp0">
 
-    <LinearLayout
-        android:id="@+id/comments_item_container"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/dp2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+    <com.github.florent37.shapeofview.shapes.RoundRectView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:shape_roundRect_bottomRightRadius="@dimen/dp8"
+        app:shape_roundRect_bottomLeftRadius="@dimen/dp8" >
+        <LinearLayout
+            android:id="@+id/comments_item_container"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
 
-        <FrameLayout
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/dp4"
-            android:padding="@dimen/dp8"
-            android:background="@drawable/circle_bg">
-            <ImageView
+            <FrameLayout
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/dp4"
+                android:padding="@dimen/dp8"
+                android:background="@drawable/circle_bg">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/ic_mode_comment_white_24dp"/>
+            </FrameLayout>
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/ic_mode_comment_white_24dp"/>
-        </FrameLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="normal"
-            android:textSize="24sp"
-            android:layout_marginTop="@dimen/dp6"
-            android:layout_marginStart="@dimen/dp16"
-            android:textColor="@color/textColor"
-            android:text="Отзывы о нас"
-            tools:ignore="HardcodedText" />
+                android:textStyle="normal"
+                android:textSize="24sp"
+                android:layout_marginTop="@dimen/dp6"
+                android:layout_marginStart="@dimen/dp16"
+                android:textColor="@color/textColor"
+                android:text="Отзывы о нас"
+                tools:ignore="HardcodedText" />
 
-    </LinearLayout>
+        </LinearLayout>
+    </com.github.florent37.shapeofview.shapes.RoundRectView>
 
 </com.google.android.material.card.MaterialCardView>

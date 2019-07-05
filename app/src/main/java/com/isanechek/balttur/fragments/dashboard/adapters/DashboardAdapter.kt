@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.dashboard_filter_tours_layout_container.*
 import kotlinx.android.synthetic.main.dashboard_info_layout_container.*
 import kotlinx.android.synthetic.main.dashboard_menu_layout_container.*
 import kotlinx.android.synthetic.main.dashboard_news_layout_container.*
+import kotlinx.android.synthetic.main.dashboard_social_item_layout_container.*
 import kotlinx.android.synthetic.main.dashboard_tours_item_layout_container.*
 import kotlinx.android.synthetic.main.empty_layout_container.*
 
@@ -35,7 +36,7 @@ class DashboardAdapter(
 ) :
     RecyclerView.Adapter<LifecycleViewHolder>() {
 
-    private val items = listOf("news", "menu", "info", "tours", "filter", "company_info", "comments", "empty")
+    private val items = listOf("news", "menu", "info", "tours", "filter", "company_info", "social", "comments", "empty")
 
     override fun onViewAttachedToWindow(holder: LifecycleViewHolder) {
         super.onViewAttachedToWindow(holder)
@@ -57,6 +58,7 @@ class DashboardAdapter(
             COMPANY_INFO_TYPE -> CompanyInfoHolder(parent.inflate(_layout.dashboard_company_item_layout_container))
             EMPTY_TYPE -> EmptyHolder(parent.inflate(_layout.empty_layout_container))
             COMMENTS_TYPE -> CommentsHolder(parent.inflate(_layout.comments_item_layout_container))
+            SOCIAL_TYPE -> SocialHolder(parent.inflate(_layout.dashboard_social_item_layout_container))
             else -> EmptyHolder(FrameLayout(parent.context))
         }
 
@@ -72,6 +74,7 @@ class DashboardAdapter(
             is CompanyInfoHolder -> holder.bindTo(callback)
             is EmptyHolder -> holder.bindTo(callback)
             is CommentsHolder -> holder.bindTo(callback)
+            is SocialHolder -> holder.bindTo(callback)
         }
     }
 
@@ -84,6 +87,7 @@ class DashboardAdapter(
         "company_info" -> COMPANY_INFO_TYPE
         "empty" -> EMPTY_TYPE
         "comments" -> COMMENTS_TYPE
+        "social" -> SOCIAL_TYPE
         else -> EMPTY_TYPE
     }
 
@@ -94,6 +98,23 @@ class DashboardAdapter(
             comments_item_container.apply {
                 Boom(this)
                 onClick { callback(Pair("comments_short_click", "")) }
+            }
+        }
+    }
+
+    inner class SocialHolder(override val containerView: View) :
+        LifecycleViewHolder(containerView),
+        LayoutContainer {
+        fun bindTo(callback: (Pair<String, Any>) -> Unit) {
+            social_item_vk_btn.apply {
+                Boom(this)
+                onClick { callback(Pair("open_vk", "https://vk.com/baltturs")) }
+                onLongClick { callback(Pair("copy_vk", "https://vk.com/baltturs")) }
+            }
+            social_item_email_btn.apply {
+                Boom(this)
+                onClick { callback(Pair("email_open", "mail@balttur.spb.ru")) }
+                onLongClick { callback(Pair("email_copy", "mail@balttur.spb.ru")) }
             }
         }
     }
@@ -235,5 +256,6 @@ class DashboardAdapter(
         private const val FILTER_TYPE = 5
         private const val COMPANY_INFO_TYPE = 6
         private const val COMMENTS_TYPE = 7
+        private const val SOCIAL_TYPE = 8
     }
 }

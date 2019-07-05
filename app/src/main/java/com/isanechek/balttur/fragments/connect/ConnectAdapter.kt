@@ -4,6 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.graphics.toColorInt
 import androidx.recyclerview.widget.RecyclerView
+import com.astritveliu.boom.Boom
 import com.isanechek.balttur._layout
 import com.isanechek.balttur.inflate
 import com.isanechek.balttur.onClick
@@ -71,8 +72,15 @@ class ConnectAdapter(private val callback: (Pair<String,String>) -> Unit) : Recy
         LayoutContainer {
         fun bindTo(item: Pair<String, String>, callback: (Pair<String, String>) -> Unit) {
             connect_item_call_number.text = item.second
-            connect_item_container.onClick {
-                callback(item)
+            connect_item_container.apply {
+                Boom(this)
+                onClick {
+                    callback(item)
+                }
+                setOnLongClickListener {
+                    callback(Pair("long", item.second))
+                    true
+                }
             }
         }
     }

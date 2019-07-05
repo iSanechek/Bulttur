@@ -6,116 +6,122 @@
     android:layout_height="100dp"
     android:layout_marginStart="@dimen/dp8"
     android:layout_marginEnd="@dimen/dp8"
-    android:layout_marginBottom="@dimen/dp8"
+    android:layout_marginBottom="@dimen/dp1"
     app:cardBackgroundColor="@color/card_bg_color"
-    app:cardCornerRadius="@dimen/dp8">
+    app:cardCornerRadius="@dimen/dp0">
 
-    <LinearLayout
+    <com.github.florent37.shapeofview.shapes.RoundRectView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
-
+        app:shape_roundRect_topRightRadius="@dimen/dp8"
+        app:shape_roundRect_topLeftRadius="@dimen/dp8">
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <FrameLayout
-                android:id="@+id/connect_item_call_container"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/dp16"
-                android:background="@drawable/company_call_bg">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-                <ImageView
+                <FrameLayout
+                    android:id="@+id/connect_item_call_container"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/dp16"
+                    android:background="@drawable/company_call_bg">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/phone_white" />
+                </FrameLayout>
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/dp4"
+                    android:gravity="center"
+                    android:text="Позвонить"
+                    android:textColor="@color/textColor"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/connect_item_work_time_container"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="center"
-                    app:srcCompat="@drawable/phone_white" />
-            </FrameLayout>
+                    android:layout_marginTop="@dimen/dp16"
+                    android:background="@drawable/company_work_time_bg">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/dp4"
-                android:gravity="center"
-                android:text="Позвонить"
-                android:textColor="@color/textColor"
-                tools:ignore="HardcodedText" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/clock_white" />
+                </FrameLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <FrameLayout
-                android:id="@+id/connect_item_work_time_container"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/dp16"
-                android:background="@drawable/company_work_time_bg">
-
-                <ImageView
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/dp4"
+                    android:gravity="center"
+                    android:textColor="@color/textColor"
+                    android:text="Время работы"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/connect_item_map_container"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="center"
-                    app:srcCompat="@drawable/clock_white" />
-            </FrameLayout>
+                    android:layout_marginTop="@dimen/dp16"
+                    android:background="@drawable/company_home_bg">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/dp4"
-                android:gravity="center"
-                android:textColor="@color/textColor"
-                android:text="Время работы"
-                tools:ignore="HardcodedText" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/home_map" />
+                </FrameLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <FrameLayout
-                android:id="@+id/connect_item_map_container"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/dp16"
-                android:background="@drawable/company_home_bg">
-
-                <ImageView
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    app:srcCompat="@drawable/home_map" />
-            </FrameLayout>
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/dp4"
+                    android:gravity="center"
+                    android:text="На карте"
+                    android:textColor="@color/textColor"
+                    tools:ignore="HardcodedText" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/dp4"
-                android:gravity="center"
-                android:text="На карте"
-                android:textColor="@color/textColor"
-                tools:ignore="HardcodedText" />
-
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </com.github.florent37.shapeofview.shapes.RoundRectView>
 
 </com.google.android.material.card.MaterialCardView>
