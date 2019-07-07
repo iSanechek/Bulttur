@@ -31,11 +31,6 @@
     <!--    </fragment>-->
 
     <fragment
-        android:id="@+id/license_screen"
-        android:name="com.isanechek.balttur.fragments.license.LicenseFragment"
-        android:label="License" />
-
-    <fragment
         android:id="@+id/call_screen"
         android:name="com.isanechek.balttur.fragments.info.InfoFragment"
         android:label="Call" />
