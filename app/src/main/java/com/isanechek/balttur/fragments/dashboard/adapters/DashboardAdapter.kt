@@ -109,12 +109,18 @@ class DashboardAdapter(
             social_item_vk_btn.apply {
                 Boom(this)
                 onClick { callback(Pair("open_vk", "https://vk.com/baltturs")) }
-                onLongClick { callback(Pair("copy_vk", "https://vk.com/baltturs")) }
+                setOnLongClickListener {
+                    callback(Pair("copy_vk", "https://vk.com/baltturs"))
+                    true
+                }
             }
             social_item_email_btn.apply {
                 Boom(this)
-                onClick { callback(Pair("email_open", "mail@balttur.spb.ru")) }
-                onLongClick { callback(Pair("email_copy", "mail@balttur.spb.ru")) }
+                onClick { callback(Pair("email_open", "secretary@tourpom.ru")) }
+                setOnLongClickListener {
+                    callback(Pair("email_copy", "secretary@tourpom.ru"))
+                    true
+                }
             }
         }
     }
@@ -191,7 +197,6 @@ class DashboardAdapter(
                     callback(Pair("info_long_click", "empty"))
                     true
                 }
-                Boom(this)
             }
             vm.loadInfoData().observe(this, Observer { text ->
                 if (text != null) {

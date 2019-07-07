@@ -114,6 +114,9 @@ dependencies {
     implementation "org.koin:koin-androidx-scope:$rootProject.koinVersion"
     implementation "org.koin:koin-androidx-viewmodel:$rootProject.koinVersion"
 
+    implementation 'com.yandex.android:mobmetricalib:3.6.4'
+    implementation 'com.android.installreferrer:installreferrer:1.0'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

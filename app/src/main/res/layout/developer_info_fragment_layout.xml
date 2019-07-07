@@ -20,39 +20,58 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <FrameLayout
+            <LinearLayout android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="110dp">
+                android:layout_height="140dp"
+                android:layout_marginStart="@dimen/dp16"
+                android:layout_marginBottom="@dimen/dp4">
 
-                <TextView
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/dp16"
+                    android:layout_gravity="center|center_vertical"
+                    android:layout_marginTop="@dimen/dp4"
+                    app:srcCompat="@drawable/ic_as_logo" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:layout_marginStart="@dimen/dp2"
+                    android:layout_gravity="center|center_vertical"
                     android:layout_marginBottom="@dimen/dp16"
-                    android:text="Averd Soft"
-                    android:textColor="@color/textColor"
-                    android:textSize="42sp"
-                    android:textStyle="bold|italic"
-                    tools:ignore="HardcodedText" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/dp16"
-                    android:layout_marginTop="@dimen/dp16"
-                    android:text="Сакт-Петербург"
-                    android:textColor="@color/textColorSecondary"
-                    android:textSize="18sp"
-                    android:textStyle="normal"
-                    tools:ignore="HardcodedText" />
-            </FrameLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Averd Soft"
+                        android:textColor="@color/textColor"
+                        android:textSize="42sp"
+                        android:textStyle="bold|italic"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|end"
+                        android:text="Сакт-Петербург"
+                        android:layout_marginTop="-8dp"
+                        android:textColor="@color/textColorSecondary"
+                        android:textSize="18sp"
+                        android:textStyle="normal"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+
+
+            </LinearLayout>
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp8"
                 android:orientation="vertical">
 
                 <TextView
@@ -69,43 +88,82 @@
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_marginStart="@dimen/dp16"
-                    android:layout_marginTop="@dimen/dp8"
                     android:layout_marginEnd="@dimen/dp16"
                     app:cardBackgroundColor="@color/card_bg_color"
                     app:cardElevation="@dimen/dp16">
 
-                    <FrameLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center|start"
-                            android:layout_marginStart="@dimen/dp24"
-                            android:orientation="horizontal">
+                        <FrameLayout
+                            android:id="@+id/dev_write_email_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp4"
-                                android:padding="@dimen/dp8"
-                                app:srcCompat="@drawable/email_white" />
-
-                            <TextView
+                            <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/dp4"
-                                android:gravity="center"
-                                android:padding="@dimen/dp6"
-                                android:text="e-mail"
-                                android:textColor="@color/textColor"
-                                android:textSize="24sp"
-                                tools:ignore="HardcodedText" />
-                        </LinearLayout>
+                                android:orientation="horizontal">
 
-                    </FrameLayout>
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp2"
+                                    android:padding="@dimen/dp8"
+                                    app:srcCompat="@drawable/email_white" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:padding="@dimen/dp4"
+                                    android:text="e-mail"
+                                    android:textColor="@color/textColor"
+                                    android:textSize="18sp"
+                                    tools:ignore="HardcodedText" />
+                            </LinearLayout>
+
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <LinearLayout
+                                android:id="@+id/dev_gp_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start|center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp2"
+                                    android:padding="@dimen/dp8"
+                                    app:srcCompat="@drawable/gp_icon_white" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:padding="@dimen/dp4"
+                                    android:text="Google play"
+                                    android:textColor="@color/textColor"
+                                    android:textSize="18sp"
+                                    tools:ignore="HardcodedText" />
+                            </LinearLayout>
+
+                        </FrameLayout>
+
+                    </LinearLayout>
 
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
@@ -113,7 +171,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp16"
+                android:layout_marginTop="@dimen/dp8"
                 android:orientation="vertical">
 
                 <TextView
@@ -130,7 +188,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
                     android:layout_marginStart="@dimen/dp16"
-                    android:layout_marginTop="@dimen/dp8"
                     android:layout_marginEnd="@dimen/dp16"
                     app:cardBackgroundColor="@color/card_bg_color"
                     app:cardCornerRadius="@dimen/dp8">
@@ -317,12 +374,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_marginStart="@dimen/dp16"
-                    android:layout_marginTop="@dimen/dp8"
                     android:layout_marginEnd="@dimen/dp16"
                     app:cardBackgroundColor="@color/card_bg_color"
                     app:cardCornerRadius="@dimen/dp8">
 
                     <LinearLayout
+                        android:id="@+id/dev_web_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center|start"

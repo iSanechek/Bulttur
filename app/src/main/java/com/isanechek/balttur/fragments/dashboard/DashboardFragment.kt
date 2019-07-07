@@ -79,7 +79,10 @@ class DashboardFragment : BaseFragment() {
                 "company_call_short_click" -> findNavController().navigate(_id.go_from_dashboard_to_connect)
                 "open_vk" -> handleAction(callback.second as String, "Переход в вк")
                 "copy_vk" -> copyDataAction(callback.second as String, CLICK_EVENT, "Скопирована вк ссылка")
-                "email_open" -> handleAction(callback.second as String,"Открыт e-mail")
+                "email_open" -> {
+                    requireActivity().sendEmail("БалтТур", callback.second as String, "")
+                    tracker.event(CLICK_EVENT, "Открыт e-mail ${callback.second}")
+                }
                 "email_copy"  -> copyDataAction(callback.second as String, CLICK_EVENT, "Скопирована e-mail")
             }
         }

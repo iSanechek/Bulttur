@@ -87,7 +87,7 @@ class DashboardViewModel(
         do {
             val data = DIGNITY_DATA.split(".")
             val number = (0 until data.size).random()
-            delay(10*1000)
+            delay(7*1000)
             emit(data[number])
             if (history.size >= 10) history.removeAt(0)
             history.add(data[number])
