@@ -103,15 +103,12 @@ class DashboardViewModel(
                 if (body != null) {
                     val newsData = parser.parseNewsBlock(body).map { toNewsEntity(it) }.toList()
                     val toursInfoData = parser.parseToursInfo(body).map { toToursInfoEntity(it) }.toList()
-                    tracker.event("TEST", "size ${toursInfoData.size} ${newsData.size}")
                     when {
                         update -> {
                             newsDao.update(newsData)
                             toursDao.update(toursInfoData)
-                            tracker.event("TEST", ">>>UPDATE<<<")
                         }
                         else -> {
-                            tracker.event("TEST", ">>>INSERT<<<")
                             newsDao.insert(newsData)
                             toursDao.insert(toursInfoData)
 

@@ -18,13 +18,13 @@ class BaltturApplication : Application() {
             androidContext(this@BaltturApplication)
             modules(listOf(appModule, dataModule))
 
-//            val config = YandexMetricaConfig.newConfigBuilder("")
-//                .withSessionTimeout(60)
-//                .withAppVersion(BuildConfig.VERSION_NAME)
-//                .build()
-//
-//            YandexMetrica.activate(this@BaltturApplication, config)
-//            YandexMetrica.enableActivityAutoTracking(this@BaltturApplication)
+            val config = YandexMetricaConfig.newConfigBuilder("9102e988-dcd0-4737-875b-79b7de63e8ba")
+                .withSessionTimeout(60)
+                .withAppVersion(BuildConfig.VERSION_NAME)
+                .build()
+
+            YandexMetrica.activate(this@BaltturApplication, config)
+            YandexMetrica.enableActivityAutoTracking(this@BaltturApplication)
         }
     }
 }

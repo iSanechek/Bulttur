@@ -3,6 +3,7 @@ package com.isanechek.balttur.fragments.dashboard
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.afollestad.materialdialogs.LayoutMode
@@ -10,6 +11,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import com.afollestad.materialdialogs.list.listItems
+import com.google.android.material.snackbar.Snackbar
 import com.isanechek.balttur.*
 import com.isanechek.balttur.data.models.DashboardMenuItem
 import com.isanechek.balttur.fragments.BaseFragment
@@ -72,7 +74,9 @@ class DashboardFragment : BaseFragment() {
                             it.dismiss()
                         }
                     }
-                "dev_info_short_click" -> openUrl(DEV_WEB_SITE, "AwerdSoft")
+                "dev_info_short_click" -> {
+                    requireActivity().actionView { DEV_WEB_SITE }
+                }
                 "info_title_short_click" -> openUrl("https://balttur.spb.ru/about-company/about-us/", "О нас")
                 "comments_short_click" -> openUrl("https://balttur.spb.ru/about-company/reviews/", "Отзывы")
                 "company_map_short_click" -> handleAction(MAPS_LIN, "Переход в карты")
@@ -95,6 +99,15 @@ class DashboardFragment : BaseFragment() {
         dashboard_fab.onClick {
             openUrl(CONSULT_ONLINE_URL, "Онлайн консультатнт")
         }
+
+        vm.errorMessage.observe(this, Observer { error ->
+            if (error != null) {
+                Snackbar
+                    .make(dashboard_app_coordinator, "Упс... При загрузке что-то пошло не так", Snackbar.LENGTH_INDEFINITE)
+                    .setAction("Повторить") { vm.load() }
+                    .show()
+            }
+        })
     }
 
     private fun handleAction(data: String, msg: String) {
