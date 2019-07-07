@@ -6,12 +6,11 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.Html
 import androidx.appcompat.app.AppCompatActivity
-import com.isanechek.balttur.fragments.license.LicenseFragment
 import com.isanechek.balttur.utils.PrefUtils
 import com.klinker.android.link_builder.Link
 import com.klinker.android.link_builder.applyLinks
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.license_fragment_layout.*
+import kotlinx.android.synthetic.main.license_layout.*
 import org.koin.android.ext.android.inject
 
 class LicenseActivity : AppCompatActivity() {
@@ -20,11 +19,11 @@ class LicenseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(_layout.license_fragment_layout)
+        setContentView(_layout.license_layout)
 
-        Picasso.get()
-            .load(R.drawable.lic_icon)
-            .into(lic_icon_iv)
+//        Picasso.get()
+//            .load(R.drawable.lic_icon)
+//            .into(lic_icon_iv)
 
         license_ok.onClick {
             pref.isLicenseShow = false
