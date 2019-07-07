@@ -158,7 +158,7 @@ class DashboardAdapter(
                     toursAdapter.submit(data)
                 }
             })
-            
+
             vm.progressState.observe(this, Observer { state ->
                 when {
                     state -> dashboard_tours_item_progress.visibility = View.VISIBLE

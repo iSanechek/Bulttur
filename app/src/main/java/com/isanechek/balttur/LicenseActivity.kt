@@ -1,35 +1,37 @@
-package com.isanechek.balttur.fragments.license
+package com.isanechek.balttur
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.text.Html
-import android.graphics.Color
-import com.squareup.picasso.Picasso
-import android.view.View
-import androidx.navigation.fragment.findNavController
-import com.isanechek.balttur.R
-import com.isanechek.balttur._layout
-import com.isanechek.balttur.fragments.BaseFragment
-import com.isanechek.balttur.onClick
+import androidx.appcompat.app.AppCompatActivity
+import com.isanechek.balttur.fragments.license.LicenseFragment
+import com.isanechek.balttur.utils.PrefUtils
 import com.klinker.android.link_builder.Link
 import com.klinker.android.link_builder.applyLinks
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.license_fragment_layout.*
+import org.koin.android.ext.android.inject
 
-class LicenseFragment : BaseFragment() {
+class LicenseActivity : AppCompatActivity() {
 
-    override fun getLayout(): Int = _layout.license_fragment_layout
+    private val pref: PrefUtils by inject()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(_layout.license_fragment_layout)
 
         Picasso.get()
             .load(R.drawable.lic_icon)
             .into(lic_icon_iv)
 
         license_ok.onClick {
-            platform.licenseMarkNotShow()
-            findNavController().navigateUp()
+            pref.isLicenseShow = false
+            Intent(this, MainActivity::class.java).run {
+                startActivity(this)
+            }
+            finishAfterTransition()
         }
 
         license_info_tv.apply {
@@ -37,7 +39,6 @@ class LicenseFragment : BaseFragment() {
             applyLinks(getLinks())
         }
     }
-
 
     private fun getLinks(): List<Link> {
 
@@ -63,15 +64,14 @@ class LicenseFragment : BaseFragment() {
     }
 
     private fun openLink(link: String) {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
-        startActivity(intent)
+        Intent(Intent.ACTION_VIEW, Uri.parse(link)).run {
+            startActivity(this)
+        }
     }
-
 
     companion object {
         private const val AVERD_LINK = "https://averd-soft.ru/ru/disclaimer.php"
         private const val BALTTUR_LINK = "https://balttur.spb.ru/about-company/"
         private const val TEXT = "<p>Нажав Я согласен, Вы подтверждаете, что прочли и согласны со следующими&nbsp;пользовательскими соглашениями AverdSoft и БалтТур</p>"
     }
-
 }
