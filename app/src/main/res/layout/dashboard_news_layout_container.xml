@@ -27,8 +27,8 @@
             android:textColor="@color/textColor"
             android:textSize="32sp"
             android:textStyle="bold"
-            tools:text="@tools:sample/cities"
-            tools:ignore="HardcodedText" />
+            tools:ignore="HardcodedText"
+            tools:text="@tools:sample/cities" />
 
         <!--Ниже будет дата последнего обновления-->
 
@@ -41,6 +41,15 @@
         <!--android:textColor="@color/textColor"-->
         <!--android:text="Все новости"-->
         <!--tools:text="@tools:sample/cities"/>-->
+
+        <ProgressBar
+            android:id="@+id/dashboard_news_item_progress"
+            style="?android:progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp4"
+            android:visibility="invisible"
+            android:layout_gravity="center|end" />
 
     </FrameLayout>
 

@@ -158,6 +158,13 @@ class DashboardAdapter(
                     toursAdapter.submit(data)
                 }
             })
+            
+            vm.progressState.observe(this, Observer { state ->
+                when {
+                    state -> dashboard_tours_item_progress.visibility = View.VISIBLE
+                    else -> dashboard_tours_item_progress.visibility = View.INVISIBLE
+                }
+            })
         }
     }
 
@@ -234,6 +241,13 @@ class DashboardAdapter(
             dashboard_news_item_dots.setViewPager(dashboard_news_pager)
             vm.newsData.observe(this, Observer { data ->
                 if (data != null) newsAdapter.submit(data)
+            })
+
+            vm.progressState.observe(this, Observer { state ->
+                when {
+                    state -> dashboard_news_item_progress.visibility = View.VISIBLE
+                    else -> dashboard_news_item_progress.visibility = View.INVISIBLE
+                }
             })
         }
     }
