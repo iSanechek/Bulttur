@@ -30,15 +30,16 @@ class DeveloperInfoFragment : BaseFragment() {
         dev_write_email_btn.apply {
             Boom(this)
             onClick {
+                val items = listOf(
+                    "averdsoft@mail.ru",
+                    "averdsoft@gmail.com"
+                )
                 MaterialDialog(requireContext()).show {
                     lifecycleOwner(this@DeveloperInfoFragment)
                     listItems(
-                        items = listOf(
-                            "averdsoft@mail.ru",
-                            "averdsoft@gmail.com"
-                        )
-                    ) { dialog, _, email ->
-                        requireActivity().sendEmail("Балтур", email, "")
+                        items = items
+                    ) { dialog, index, _ ->
+                        requireActivity().sendEmail("БалтТур", items[index], "")
                         dialog.dismiss()
                     }
                     negativeButton(text = "Закрыть") {
