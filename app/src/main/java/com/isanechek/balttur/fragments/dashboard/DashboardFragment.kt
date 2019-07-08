@@ -42,7 +42,7 @@ class DashboardFragment : BaseFragment() {
                 else -> openUrl(item.data, item.title)
             }
         }
-        val toursAdapter = DashboardToursAdapter { item -> openUrl(item.bigUrl, item.bigTitle) }
+        val toursAdapter = DashboardToursAdapter { item -> openUrl("https://balttur.spb.ru${item.bigUrl}", item.bigTitle) }
         val rootAdapter = DashboardAdapter(vm, newsAdapter, menuAdapter, toursAdapter) { callback ->
             when (callback.first) {
                 "info_long_click" -> MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
