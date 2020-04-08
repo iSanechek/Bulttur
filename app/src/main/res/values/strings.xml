@@ -3,4 +3,5 @@
     <string name="title_home">Домашняя</string>
     <string name="title_search">Поиск</string>
     <string name="title_info">Информация</string>
+    <string name="notwork_error_msg">Упс… Проблема с подключением. Попробуйте позже.</string>
 </resources>

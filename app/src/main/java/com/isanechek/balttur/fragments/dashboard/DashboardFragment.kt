@@ -2,6 +2,7 @@ package com.isanechek.balttur.fragments.dashboard
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -19,6 +20,7 @@ import com.isanechek.balttur.fragments.dashboard.adapters.DashboardAdapter
 import com.isanechek.balttur.fragments.dashboard.adapters.DashboardMenuAdapter
 import com.isanechek.balttur.fragments.dashboard.adapters.DashboardNewsAdapter
 import com.isanechek.balttur.fragments.dashboard.adapters.DashboardToursAdapter
+import com.isanechek.balttur.utils.NetworkUtils
 import kotlinx.android.synthetic.main.dashboard_fragment_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -100,7 +102,7 @@ class DashboardFragment : BaseFragment() {
             openUrl(CONSULT_ONLINE_URL, "Онлайн консультатнт")
         }
 
-        vm.errorMessage.observe(this, Observer { error ->
+        vm.errorMessage.observe(requireActivity(), Observer { error ->
             if (error != null) {
                 Snackbar
                     .make(dashboard_app_coordinator, "Упс... При загрузке что-то пошло не так", Snackbar.LENGTH_INDEFINITE)
@@ -125,12 +127,16 @@ class DashboardFragment : BaseFragment() {
         dialogUtils.showWarningBrowserDialog(requireContext(), this) { isOpen ->
             clickEvent("Открыто $title")
             if (isOpen) {
-                findNavController().navigate(
-                    _id.go_from_dashboard_to_web, bundleOf(
-                        Pair("args_url", url),
-                        Pair("args_title", title)
+                if (NetworkUtils.isConnected(requireContext())) {
+                    findNavController().navigate(
+                        _id.go_from_dashboard_to_web, bundleOf(
+                            Pair("args_url", url),
+                            Pair("args_title", title)
+                        )
                     )
-                )
+                } else {
+                    Toast.makeText(requireContext(), _text.notwork_error_msg, Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

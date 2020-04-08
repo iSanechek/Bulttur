@@ -29,7 +29,7 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_gravity="center"
-                android:tint="@color/textColor"
+                app:tint="@color/textColor"
                 tools:src="@drawable/ic_info_outline_black_24dp" />
 
         </FrameLayout>

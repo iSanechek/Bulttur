@@ -16,20 +16,35 @@ android {
     compileSdkVersion rootProject.compileSdkVersion
     def appId = "com.averdsoft.balttur"
     def fileNaming = "apk/Balttur"
-    def versionNumber = 11
+    def versionNumber = 12
     def versionMajor = "1"
     def versionMinor = "0"
-    def versionPatch = "1"
+    def versionPatch = "2"
     def versionBuild = -1
     def versionPropsFile = file('version.properties')
+
     if (versionPropsFile.canRead()) {
-        Properties versionProps = new Properties()
+        def versionProps = new Properties()
         versionProps.load(new FileInputStream(versionPropsFile))
-        versionBuild = versionProps['VERSION_BUILD'].toInteger() + 1
-        versionProps['VERSION_BUILD'] = versionBuild.toString()
-        versionProps['DATE_BUILD'] = getDateTime()
-        versionProps.store(versionPropsFile.newWriter(), null)
+        versionBuild = versionProps['VERSION_BUILD'].toInteger()
+    } else {
+        throw new FileNotFoundException("Could not read version.properties!")
     }
+
+    ext.autoIncrementBuildNumber = {
+
+        if (versionPropsFile.canRead()) {
+            def versionProps = new Properties()
+            versionProps.load(new FileInputStream(versionPropsFile))
+            versionBuild = versionProps['VERSION_BUILD'].toInteger() + 1
+            versionProps['VERSION_BUILD'] = versionBuild.toString()
+            versionProps['DATE_BUILD'] = getDateTime()
+            versionProps.store(versionPropsFile.newWriter(), null)
+        } else {
+            throw new FileNotFoundException("Could not read version.properties!")
+        }
+    }
+
     defaultConfig {
         applicationId appId
         minSdkVersion rootProject.minSdkVersion
@@ -39,6 +54,7 @@ android {
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     signingConfigs {
             release {
             storeFile file("/home/isanechek/keys/averdsoft.jks")
@@ -55,18 +71,36 @@ android {
             signingConfig signingConfigs.release
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions {
+        exclude("META-INF/*.kotlin_module")
+    }
+
     android.applicationVariants.all { variant ->
         variant.outputs.all {
             outputFileName = "${fileNaming}-${versionMajor}.${versionMinor}.${versionPatch}.apk"
         }
     }
-    androidExtensions {
-        experimental = true
-    }
+}
+
+androidExtensions {
+    experimental = true
 }
 
 dependencies {
@@ -84,26 +118,25 @@ dependencies {
     implementation "com.google.android.material:material:$rootProject.materialVersion"
     implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerViewVersion"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
-    implementation 'androidx.viewpager2:viewpager2:1.0.0-alpha06'
+    implementation 'androidx.viewpager2:viewpager2:1.1.0-alpha01'
     implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
     implementation 'androidx.palette:palette:1.0.0'
 
     implementation 'com.squareup.picasso:picasso:2.71828'
 
     implementation 'me.toptas.fancyshowcase:fancyshowcaseview:1.1.5'
-    implementation 'com.afollestad.material-dialogs:core:3.1.0'
-    implementation 'com.afollestad.material-dialogs:lifecycle:3.1.0'
-    implementation 'com.afollestad.material-dialogs:bottomsheets:3.1.0'
+    implementation 'com.afollestad.material-dialogs:core:3.3.0'
+    implementation 'com.afollestad.material-dialogs:lifecycle:3.3.0'
+    implementation 'com.afollestad.material-dialogs:bottomsheets:3.3.0'
     implementation 'com.github.florent37:shapeofview:1.4.7'
-//    implementation 'com.izikode.izilib:veinview:0.2'
     implementation 'com.github.astrit-veliu:Boom:1.0'
 
-    def room_version = "2.1.0"
+    def room_version = "2.2.5"
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
-    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion"
 
@@ -111,13 +144,14 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.12.1'
 
     implementation "org.koin:koin-core:$rootProject.koinVersion"
+    implementation "org.koin:koin-core-ext:$rootProject.koinVersion"
     implementation "org.koin:koin-androidx-scope:$rootProject.koinVersion"
     implementation "org.koin:koin-androidx-viewmodel:$rootProject.koinVersion"
 
     implementation 'com.yandex.android:mobmetricalib:3.6.4'
-    implementation 'com.android.installreferrer:installreferrer:1.0'
+    implementation 'com.android.installreferrer:installreferrer:1.1.2'
 
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }

@@ -1,8 +1,12 @@
 package com.isanechek.balttur.fragments.dashboard
 
+import android.app.Application
+import android.content.Context
+import android.util.Log
 import androidx.lifecycle.*
 import com.isanechek.balttur.BASE_URL
 import com.isanechek.balttur.DIGNITY_DATA
+import com.isanechek.balttur._text
 import com.isanechek.balttur.data.NetworkClient
 import com.isanechek.balttur.data.PlatformContract
 import com.isanechek.balttur.data.database.dao.NewsDao
@@ -12,20 +16,23 @@ import com.isanechek.balttur.data.database.entity.ToursInfoEntity
 import com.isanechek.balttur.data.models.News
 import com.isanechek.balttur.data.models.ToursInfo
 import com.isanechek.balttur.data.parsers.HomePageParser
+import com.isanechek.balttur.utils.NetworkUtils
 import com.isanechek.balttur.utils.RequestLimiter
 import com.isanechek.balttur.utils.Tracker
 import kotlinx.coroutines.*
 import java.util.concurrent.TimeUnit
 
 class DashboardViewModel(
+    application: Application,
     private val client: NetworkClient,
     private val parser: HomePageParser,
     private val platform: PlatformContract,
     private val newsDao: NewsDao,
     private val toursDao: ToursDao,
     private val tracker: Tracker
-) : ViewModel() {
+) : AndroidViewModel(application) {
 
+    private val context: Context = getApplication()
     private val isTimeForUpdate = RequestLimiter(1, TimeUnit.DAYS, platform)
     private val _errorMessage: MutableLiveData<String> = MutableLiveData()
     private val _progressState: MutableLiveData<Boolean> = MutableLiveData()
@@ -86,12 +93,16 @@ class DashboardViewModel(
     fun loadInfoData(): LiveData<String> = liveData(context = viewModelScope.coroutineContext + Dispatchers.Default) {
         do {
             val data = DIGNITY_DATA.split(".")
-            val number = (0 until data.size).random()
+            val number = (data.indices).random()
             delay(7*1000)
             emit(data[number])
             if (history.size >= 10) history.removeAt(0)
             history.add(data[number])
         } while (true)
+    }
+
+    fun showNetworkErrorMessage() {
+        hideProgressAndErrorMsg(context.getString(_text.notwork_error_msg))
     }
 
     private suspend fun loadFromNetwork(update: Boolean) {
@@ -117,15 +128,15 @@ class DashboardViewModel(
                     _progressState.postValue(false)
                 } else {
                     tracker.event(TAG, "Parse data fail! :(")
-                    hideProgressAndErroMsg("Упс... При парсинге произошла ошибкаю :(")
+                    hideProgressAndErrorMsg("Упс... При парсинге произошла ошибкаю :(")
                 }
             } else {
                 tracker.event(TAG, "Load data fail! :(")
-                hideProgressAndErroMsg("Упс... При загрузке произошла ошибкаю :(")
+                hideProgressAndErrorMsg("Упс... При загрузке произошла ошибкаю :(")
             }
         } catch (ex: Exception) {
             tracker.event(TAG, "Load data fail! :(", ex)
-            hideProgressAndErroMsg("Упс... При загрузке произошла ошибкаю :(")
+            hideProgressAndErrorMsg("Упс... При загрузке произошла ошибкаю :(")
         }
     }
 
@@ -134,7 +145,7 @@ class DashboardViewModel(
         viewModelScope.coroutineContext.cancel()
     }
 
-    private fun hideProgressAndErroMsg(msg: String) {
+    private fun hideProgressAndErrorMsg(msg: String) {
         _progressState.postValue(false)
         _errorMessage.postValue(msg)
     }
